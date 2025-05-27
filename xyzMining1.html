@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            overflow: hidden;
+            overflow: auto; /* Changed from hidden to auto to allow scrolling */
             background-color: #000;
             font-family: 'Courier New', monospace;
             color: #0f0;
@@ -30,7 +30,9 @@
             border: 1px solid #0f0;
             padding: 15px;
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-            
+            max-height: calc(100vh - 100px); /* Set maximum height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            margin-bottom: 60px; /* Add space at bottom for ads */
         }
         
         .header {
@@ -132,9 +134,20 @@
             <div class="notification" id="solNotification"></div>
         </div>  
     </div>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
+function adjustDashboardHeight() {
+            const dashboard = document.querySelector('.dashboard');
+            const windowHeight = window.innerHeight;
+            const adHeight = 60; // Estimated ad height - adjust as needed
+            
+            dashboard.style.maxHeight = (windowHeight - 100 - adHeight) + 'px';
+        }
+        
+        window.addEventListener('load', adjustDashboardHeight);
+        window.addEventListener('resize', adjustDashboardHeight);
+
         // Quantum animation background
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
