@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'">
+    <title>Advanced Human Verification System</title>
+    <meta name="description" content="Multi-layered verification with AI detection">
+    <link rel="stylesheet" href="xyzSentinel.css">
+  
+    </head>
+<body>
+    <div class="security-badge">🛡️</div>
+    <div class="verification-container" id="verification-container">
+        <div class="detection-indicator" id="detection-indicator">AI Detection: 0%</div>
+        <h1>Advanced Human Verification</h1>
+        <div class="method-title" id="method-title">Initializing Verification...</div>
+        
+        <!-- AI Detection Warning -->
+        <div class="ai-detection-container" id="ai-detection-container">
+            <div class="ai-detection-title">⚠️ AI/Robot Detected</div>
+            <div class="ai-detection-message" id="ai-detection-message"></div>
+            <div class="ai-detection-reasons" id="ai-detection-reasons"></div>
+            <button class="hold-button" onclick="resetVerification()">I'm Human - Try Again</button>
+        </div>
+        
+        <!-- Voice CAPTCHA -->
+        <div class="voice-captcha" id="voice-captcha">
+            <div class="captcha-word" id="captcha-word"></div>
+            <button class="hold-button" id="hold-button">Hold to Speak</button>
+            <div class="switch-method" onclick="switchMethod()">Try another method</div>
+        </div>
+        
+        <!-- Math CAPTCHA -->
+        <div class="math-captcha" id="math-captcha">
+            <div class="math-problem" id="math-problem"></div>
+            <input type="number" class="math-input" id="math-answer" placeholder="Answer">
+            <button class="hold-button" onclick="checkMathAnswer()">Verify</button>
+            <div class="switch-method" onclick="switchMethod()">Try another method</div>
+        </div>
+        
+        <!-- Image CAPTCHA -->
+        <div class="image-captcha" id="image-captcha">
+            <div id="image-instruction">Select all images containing <span id="image-target"></span></div>
+            <div class="image-options" id="image-options"></div>
+            <button class="hold-button" onclick="checkImageSelection()">Verify Selection</button>
+            <div class="switch-method" onclick="switchMethod()">Try another method</div>
+        </div>
+        
+        <!-- Behavior CAPTCHA -->
+        <div class="behavior-captcha" id="behavior-captcha">
+            <div class="behavior-instructions">Please trace the shape below as accurately as possible</div>
+            <canvas class="behavior-canvas" id="behavior-canvas" width="350" height="200"></canvas>
+            <button class="hold-button" onclick="analyzeBehavior()">Submit Drawing</button>
+            <div class="switch-method" onclick="switchMethod()">Try another method</div>
+        </div>
+        
+        <div class="message" id="message"></div>
+        <div class="attempts-warning" id="attempts-warning"></div>
+        
+        <div class="loading-container" id="loading-container">
+            <div class="loading-text" id="loading-text">Verifying your response...</div>
+            <div class="loader"></div>
+        </div>
+    </div>
+    
+    <div class="security-footer">
+        Protected by Sentinel AI Shield • <span id="timestamp"></span> • <span id="session-id"></span>
+    </div>
+    <script src="xyzSentinel.js"></script>
+    </body>
+</html>

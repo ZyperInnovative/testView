@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XYZ Transaction</title>
+  <link rel="stylesheet" href="xyzSendTransaction.css">
+  <body>
+  <div class="container">
+    <h1>Quantum Wallet</h1>
+    <div class="balance-card">
+      <h2>Available Balance</h2>
+      <p id="xyzBalance" class="pulse">0.00</p>
+    </div>
+    <div class="form-group">
+      <label for="recipientAddress">Recipient Address</label>
+      <input type="text" id="recipientAddress" placeholder="Enter XYZ blockchain address"/>
+    </div>
+    <div class="form-group">
+      <label for="amount">Transfer Amount</label>
+      <input type="number" id="amount" placeholder="0.00 XYZ"/>
+    </div>
+    <button id="sendButton">Initiate Transfer</button>
+  </div>
+
+  <div id="transactionModal" class="modal">
+    <div class="modal-content">
+      <h2>Transaction Verification</h2>
+      <div class="transaction-details">
+        <p><strong>Recipient Address:</strong> <span id="modalRecipient"></span></p>
+        <p><strong>Recipient Email:</strong> <span id="modalRecipientEmail"></span></p>
+        <p><strong>Recipient UID:</strong> <span id="modalRecipientUid"></span></p>
+        <p><strong>Amount:</strong> <span id="modalAmount"></span> XYZ</p>
+        <p><strong>Network Fee:</strong> <span id="modalGasFee"></span> SOL</p>
+      </div>
+      <div class="button-group">
+        <button id="confirmButton">Confirm</button>
+        <button id="cancelButton" class="cancel-btn">Cancel</button>
+      </div>
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Quantum encryption in progress...</p>
+      </div>
+      </div>
+      </div>
+      <h3>Read Here!</h3>
+      <div class="container">
+      <div class="faq-section">
+    <div class="address-card">
+        <div class="address-title">
+            <i class="fas fa-question-circle"></i>
+            XYZ TRANSACTION GUIDELINES
+        </div>
+        
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-dollar-sign"></i>
+                    Token Valuation
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>XYZ tokens have inherent value in the quantum mining ecosystem. <strong>Do not sell your XYZ below $0.50</strong> as this undervalues the network's computational power. Early adopters who hold will benefit most from future protocol upgrades.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Transaction Security
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Wrong XYZ addresses cannot recover lost funds.</strong> All transactions are irreversible once confirmed on the quantum blockchain. Always verify the recipient address 3 times before sending.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-shield-alt"></i>
+                    Fraud Prevention
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Beware of impersonators</strong> offering "doubling" services or requesting your private keys. Official XYZ support will never ask for sensitive information. Report suspicious activity immediately.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-bolt"></i>
+                    Gas Fees Explained
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Quantum transactions require SOL for gas fees (0.00005-0.0008 SOL). These fees maintain network security and prevent spam. Higher value transactions get priority processing.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-clock"></i>
+                    Processing Times
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Standard transactions confirm within 2-5 quantum blocks (~30 sec). During network congestion, premium fees accelerate processing. All transactions finalize by 11:59 PM PST daily.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-lock"></i>
+                    Wallet Security
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Enable quantum encryption in settings for military-grade protection. Never share your recovery phrase. For large holdings, use our cold storage integration for maximum security.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+</body>
+<script src="xyzSendTransaction-1A1.js"></script>
+<script type="module" src="xyzSendTransaction.js"></script>
+</body>
+</html>

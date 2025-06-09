@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="icon" href="https://www.favicon.cc/logo3d/936710.png" type="image/png">
+    <link rel="stylesheet" href="xyzProfile.css">
+    </head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://www.favicon.cc/logo3d/936710.png" alt="Profile" class="profile-icon">            <div class="user-info">
+                <h1 id="userName">LOADING...</h1>
+                <div class="user-id" id="userID">ID: •••••••••</div>
+            </div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Email Address</div>
+                <div class="info-value" id="email">••••@••••.•••</div>
+                <button class="button" id="changeEmailBtn">*You can't change your email.</button>
+                <div class="hidden" id="editEmailSection">
+                    <input type="email" class="input" id="newEmailInput" placeholder="New Email">
+                    <input type="password" class="input" id="emailPasswordInput" placeholder="Current Password">
+                    <button class="button button-block" id="saveEmailBtn">Update Email</button>
+                    <button class="button button-block" id="cancelEmailBtn">Cancel</button>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">XYZ Address</div>
+                <div class="info-value" id="xyzAddress">0x••••••••••••••••••</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">Registered Solana Address</div>
+                <div class="info-value" id="xyzSolAddress">loading...</div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-label">Password</div>
+                <button class="button" id="changePasswordBtn">Change Password</button>
+                <div class="hidden password-form" id="changePasswordSection">
+                    <input type="password" class="input" id="currentPasswordInput" placeholder="Current Password">
+                    <input type="password" class="input" id="newPasswordInput" placeholder="New Password">
+                    <input type="password" class="input" id="confirmPasswordInput" placeholder="Confirm New Password">
+                    <button class="button button-block" id="savePasswordBtn">Update Password</button>
+                    <button class="button button-block" id="cancelPasswordBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+        <button class="logout-btn" id="logoutBtn">Log Out</button>
+    </div>
+    
+    <div class="modal" id="logoutModal">
+        <div class="modal-content">
+            <h3>Confirm Log Out</h3>
+            <p>Are you sure you want to log out?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm-btn" id="confirmLogout">Confirm</button>
+                <button class="modal-btn cancel-btn" id="cancelLogout">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="xyzProfile.js"></script>
+    </body>
+</html>
