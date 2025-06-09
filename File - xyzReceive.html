@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYZ Deposit Address</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link rel="stylesheet" href="xyzReceive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="container">
+        <h1>DEPOSIT ADDRESS</h1>
+        <div id="xyzFaqButton" class="floating-faq-button">
+    <div class="faq-chevron">?</div>
+    <div class="pulse-ring"></div>
+</div>
+        <div class="address-card">
+            <div class="address-title">
+                <i class="fas fa-wallet"></i>
+                YOUR XYZ ADDRESS
+            </div>
+            <p> *Use this XYZ address to receive and deposit xyz balance.</p><br>
+            <div id="xyzAddress" class="address-value">Loading...</div>
+            <button id="copyXyz" class="copy-btn">
+                <i class="far fa-copy"></i> COPY ADDRESS
+            </button>
+        </div>
+        
+        <div class="address-card">
+            <div class="address-title">
+                <i class="fab fa-solana"></i>
+                SOLANA ADDRESS
+                            </div>
+                            <p>*Copy and Deposit ≥5 Solana in this address, then go to verify transaction.</p><br>
+            <div id="solanaAddress" class="address-value">I will provide Solana address</div>
+            <button id="copySolana" class="copy-btn">
+                <i class="far fa-copy"></i> COPY ADDRESS
+            </button>
+        </div>
+        
+        <button id="verifyBtn" class="verify-btn">
+            <i class="fas fa-check-circle"></i> VERIFY TRANSACTION
+        </button>
+    
+<div class="faq-container">
+    <div class="address-card">
+        <div class="address-title">
+            <i class="fas fa-question-circle"></i>
+            FREQUENTLY ASKED QUESTIONS
+        </div>
+        
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-gas-pump"></i>
+                    What happens to my Solana deposit?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Your Solana deposit is used for gas fees during mining operations. The total amount of Solana being deposited to your account will be refunded during distribution.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-wallet"></i>
+                    Can I use a different wallet?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    No, you must use your registered wallet when depositing Solana. Using a different wallet may result in loss of access to your funds.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-robot"></i>
+                    Why is Solana deposit required?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    The deposit serves three purposes: proving humanity, preventing bot farming, and discouraging multiple account creation.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-shield-alt"></i>
+                    Is my deposit safe?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, your deposit is secured by smart contracts. Only gas fees used for mining will be deducted, with the balance returned.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <div class="notification" id="notification"></div>
+    <script type="module" src="xyzReceive.js"></script>
+    </body>
+    </html>

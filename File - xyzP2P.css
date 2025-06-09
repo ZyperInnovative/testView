@@ -1,0 +1,17 @@
+body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+        canvas {
+            display: block;
+        }
+        .info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            text-shadow: 0 0 5px #0f0;
+        }

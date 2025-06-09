@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Recovery</title>
+   <link rel="stylesheet" href="xyzForgotPass.css"> 
+   </head>
+<body>
+    <!-- Trigger link -->
+    <p><a href="#" id="pwTrigger" class="pw-trigger">Are you sure you want to change your password? Just click me, if yes.
+    </a></p>
+
+    <!-- Modal -->
+    <div id="pwModal" class="pw-modal-overlay">
+        <div class="pw-modal-container">
+               <h2 class="pw-modal-title">Reset Password</h2>
+            
+            <form id="pwForm">
+                <input type="email" id="pwEmailInput" class="pw-input-field" placeholder="Enter your email" required>
+                <div id="pwErrorMsg" class="pw-error-msg"></div>
+                <div id="pwSuccessMsg" class="pw-success-msg"></div>
+                <button type="button" id="pwSubmitBtn" class="pw-submit-btn">Send Reset Link</button>
+            </form>
+            
+            <div class="pw-info-note">
+                Check the email in your spam section. Make sure your email is registered or else you will not receive code.
+            </div>
+        </div>
+    </div>
+    <script type="module" src="xyzForgotPass.js"></script>
+    </body>
+</html>

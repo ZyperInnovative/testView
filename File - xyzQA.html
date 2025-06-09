@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XYZ Project Questionnaire</title>
+  <link rel="stylesheet" href="xyzQA.css">
+  </head>
+<body>
+  <div id="authStatus" class="auth-status unauthenticated">
+    Checking authentication...
+  </div>
+
+  <div class="question-container" id="questionContainer" style="display: none;">
+    <h2>XYZ Project Survey</h2>
+    <p>Do you prefer referral system or pure mining and activity reward participation?</p>
+    
+    <div class="explanation">
+      <p><strong>Disadvantage of referral systems:</strong> Many projects rely heavily on referral systems which can reduce active participation. Users often become dependent on referrals rather than engaging directly with the platform's core activities. This can lead to:</p>
+      <ul>
+        <li>Lower overall platform engagement</li>
+        <li>Inequality between users with large networks and those without</li>
+        <li>Less focus on product development as marketing becomes primary growth driver</li>
+        <li>Potential for spammy behavior as users aggressively seek referrals</li>
+      </ul>
+    </div>
+    
+    <div class="options">
+      <div class="option" id="yesOption" onclick="selectOption('yes')">
+        <span class="circle yes"></span> Yes
+      </div>
+      <div class="option" id="noOption" onclick="selectOption('no')">
+        <span class="circle no"></span> No
+      </div>
+    </div>
+  </div>
+  
+  <div class="results" id="resultsContainer" style="display: none;">
+    <h3>Community Results</h3>
+    <div id="resultsText">Loading results...</div>
+    <div class="progress-container" id="progressBar">
+      <div class="progress-yes" id="progressYes" style="width: 50%"></div>
+      <div class="progress-no" id="progressNo" style="width: 50%"></div>
+    </div>
+  </div>
+  
+  <div class="gift-animation" id="giftAnimation">
+    <div class="confetti"></div>
+    <h2>Thank you for participating!</h2>
+    <p>You receive 10 XYZ</p>
+    <button class="gift-confirm" onclick="closeGiftAnimation()">Confirm</button>
+  </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="xyzQA.js"></script>
+  
+  </body>
+</html>

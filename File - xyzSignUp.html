@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quantum Sign-Up Portal</title>
+  <link rel="stylesheet" href="xyzSignUp.css">
+  </head>
+<body>
+  <canvas id="quantumCanvas"></canvas>
+  
+  <div class="signup-container">
+    <div class="connection-pulse"></div>
+    <h2>XYZ ACCESS PORTAL</h2>
+    <form id="signup-form">
+      <input type="text" id="fullName" placeholder="FULL NAME" required />
+      <input type="text" id="userName" placeholder="USERNAME" required />
+      <input type="email" id="email" placeholder="EMAIL" required />
+      <input type="password" id="password" placeholder="PASSWORD" required />
+      <input type="password" id="confirmPassword" placeholder="CONFIRM PASSWORD" required />
+      <input type="text" id="referralCode" placeholder="REFERRAL CODE" />
+      
+      <div class="button-group">
+        <button type="submit">INITIALIZE ACCOUNT</button>
+        <a href="xyzLogIn.html">EXISTING USER ACCESS</a>
+         </div>
+         
+<p><a href="#" id="pwTrigger" class="pw-trigger">Forgot Password?</a></p>
+     </div>
+     </form>
+  </div>
+  <div id="floatingContainer" style="
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 500px;
+    height: 400px;
+    background: black;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+    padding: 10px;
+    border-radius: 8px;
+">
+    <button id="closeBtn" style="
+        float: right;
+        background: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    ">Close</button>
+    <iframe src="xyzForgotPass.html" style="width:100%; height: 90%; border: none;"></iframe>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script type="module" src="xyzSignUp.js"></script>
+</body>
+</html>

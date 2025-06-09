@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SOL Deposit Verification Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="xyzTransactionVerify.css">
+  <body>
+  <div class="particles" id="particles"></div>
+  <h1>SOL DEPOSIT VERIFICATION</h1>
+  <h6> Send ≥$5 Solana on your deposit solana address using your registered Solana wallet address, then verify.</h6>
+  
+  <div class="container">
+    <div class="info-card">
+      <h2>Wallet Information</h2>
+      <p><strong>Registered Solana Wallet Address:</strong></p>
+      <span id="registeredWallet">Loading...</span>
+    </div>
+    
+    <div id="statusMessage" class="status"></div>
+        <button id="verifyButton">
+      <span>Verify Transaction</span>
+      <div class="spinner" id="verifySpinner"></div>
+    </button>
+  </div>
+  
+  <div id="xyzFaqButton" class="floating-faq-button">
+    <div class="faq-chevron">?</div>
+    <div class="pulse-ring"></div>
+</div>  
+  <!-- Modal for wallet registration -->
+  <div id="modal">
+    <div id="modalContent">
+      <h3>Register Solana Wallet</h3>
+      <p>Please enter your Solana wallet address to receive deposits:</p>
+      <input id="walletInput" placeholder="Enter your Solana wallet address" />
+      
+      <div class="button-group">
+        <button id="confirmWallet">
+          <span>Confirm Address</span>
+          <div class="spinner" id="confirmSpinner"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="xyzFaqModal" class="faq-modal">
+    <div class="faq-modal-content">
+        <div class="faq-modal-header">
+            <h3><i class="fas fa-atom"></i> XYZ Quantum Miner FAQ</h3>
+            <span id="xyzFaqClose" class="faq-close-btn">&times;</span>
+        </div>
+        <div class="faq-modal-body">
+            <div class="faq-scroll-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        Will my deposited Solana be refunded?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Yes, your total deposited Solana will be fully refunded during distribution.</strong></p>
+                        <p>Every SOL you deposit will be accounted for and returned to your registered wallet address when the distribution period begins. This is not a purchase - it's a verification of your wallet address and humanity.</p>
+                        <p>The refund will be processed automatically to the same wallet address you used for deposit.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-microchip"></i>
+                        How is Solana used for gas fees?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>A small portion of your deposit will be used to cover network gas fees.</strong></p>
+                        <p>Solana blockchain transactions require gas fees (transaction fees) to process. These fees are minimal but necessary for:</p>
+                        <ul>                           
+                            <li>•Verifying your deposit transaction</li>
+                            <li>•Processing your eventual refund</li>
+                            <li>•Maintaining network security</li>
+                        </ul>
+                        <p>The exact amount used for gas will be transparently displayed in your transaction history.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fab fa-solana"></i>
+                        Why do I need to deposit Solana?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>The Solana deposit serves two important purposes:</strong></p>
+                        <p>1. <strong>Human Verification:</strong> This process helps us confirm you're a real person and not a bot or automated system. The blockchain interaction creates a unique fingerprint that's difficult to fake at scale.</p>
+                        <p>2. <strong>Wallet Authentication:</strong> By depositing from your wallet, you're proving ownership of that address, which ensures your rewards and refunds go to the right place.</p>
+                        <p>This method effectively discourages bot farmers and ensures fair distribution to genuine participants.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-wifi"></i>
+                        What is the minimum deposit amount?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>The minimum deposit amount is $5 worth of Solana.</strong></p>
+                        <p>This amount is set to:</p>
+                        <ul>
+                            <li>•Ensure meaningful participation</li>
+                            <li>•Cover network transaction costs</li>
+                            <li>•Maintain system security against spam</li>
+                        </ul>
+                        <p>You can deposit more than the minimum amount if you wish.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-clock"></i>
+                        When will distributions occur?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Distributions occur at regular intervals as announced.</strong></p>
+                        <p>You'll receive notifications about:</p>
+                        <ul>
+                            <li>•Upcoming distribution dates</li>
+                            <li>•Exact refund amounts</li>
+                            <li>•Transaction status updates</li>
+                        </ul>
+                        <p>All distributions are processed on-chain for complete transparency.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Is the deposit system secure?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Yes, the deposit and refund system is designed with full on-chain transparency.</strong></p>
+                        <p>All transactions are visible on the Solana blockchain, meaning you can verify deposits, refunds, and gas usage independently. We do not store your private keys, and all logic is driven by smart contract infrastructure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="module" src="xyzTransactionVerify.js"></script>
+</body>
+</html>

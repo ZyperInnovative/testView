@@ -1,0 +1,285 @@
+  :root {
+      --matrix-green: #00ff41;
+      --neon-cyan: #00f7ff;
+      --neon-purple: #a777e3;
+      --neon-pink: #ff00ff;
+      --dark-bg: #0a0a14;
+      --darker-bg: #050510;
+      --terminal-bg: rgba(10, 15, 20, 0.9);
+      --glow-blue: 0 0 10px var(--neon-cyan);
+      --glow-pink: 0 0 10px var(--neon-pink);
+      --scanline: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 65, 0.05),
+        rgba(0, 255, 65, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+    }
+
+    @font-face {
+      font-family: 'Cyber';
+      src: url('https://fonts.cdnfonts.com/css/cyberpunk') format('woff2');
+    }
+
+    body {
+      background-color: var(--darker-bg);
+      background-image: 
+        var(--scanline),
+        radial-gradient(circle at 20% 30%, rgba(0, 247, 255, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(167, 119, 227, 0.1) 0%, transparent 25%);
+      color: var(--neon-cyan);
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 2rem;
+      min-height: 100vh;
+      margin-bottom:30%;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .header h1 {
+      font-family: 'Cyber', sans-serif;
+      font-size: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3rem;
+      margin: 0 0 0.5rem 0;
+      color: var(--neon-cyan);
+      text-shadow: var(--glow-blue);
+      position: relative;
+    }
+
+    .header p {
+      color: var(--neon-purple);
+      margin: 0;
+      font-size: 0.9rem;
+      position: sticky;
+      top:0;
+    }
+
+    .notification-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .notification-card {
+      background: rgba(5, 10, 20, 0.7);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 247, 255, 0.1);
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+.card-topic {
+  /* existing styles */
+}
+.card-topic::after {
+  content: "...Read More";
+  color: var(--neon-cyan);
+}
+    .notification-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 247, 255, 0.3);
+      border-color: var(--neon-pink);
+    }
+
+    .card-preview {
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .notification-card:hover .card-preview img {
+      transform: scale(1.05);
+    }
+
+    .card-preview::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to top, rgba(5,10,20,0.9), transparent);
+    }
+
+    .card-info {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--neon-cyan);
+      margin: 0 0 0.5rem 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-topic {
+      font-size: 0.8rem;
+      color: var(--neon-purple);
+      margin-bottom: auto;
+    }
+
+    .card-date {
+      font-size: 0.7rem;
+      color: var(--neon-cyan);
+      opacity: 0.7;
+      text-align: right;
+    }
+
+    /* Expanded view */
+    .notification-expanded {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5,10,20,0.95);
+      z-index: 1000;
+      padding: 2rem;
+      overflow-y: auto;
+      display: none;
+      backdrop-filter: blur(5px);
+      margin-bottom:10%;
+    }
+
+    .expanded-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--terminal-bg);
+      border: 1px solid var(--glow-blue);
+      box-shadow: 0 0 30px var(--neon-purple);
+      padding: 2rem;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: var(--neon-pink);
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      z-index: 100;
+    }
+
+    .expanded-header {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--neon-purple);
+      padding-bottom: 1rem;
+    }
+
+    .expanded-title {
+      font-size: 1.8rem;
+      color: var(--neon-pink);
+      margin: 0 0 0.5rem 0;
+    }
+
+    .expanded-topic {
+      display: inline-block;
+      background: rgba(167, 119, 227, 0.2);
+      color: var(--neon-purple);
+      padding: 0.3rem 1rem;
+      font-size: 0.9rem;
+      border: 1px solid var(--neon-purple);
+      border-radius: 3px;
+      margin-right: 1rem;
+    }
+
+    .expanded-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      margin: 1rem 0;
+      border: none;
+    }
+
+    .expanded-text {
+      line-height: 1.6;
+      margin: 1.5rem 0;
+    }
+
+    .expanded-link {
+      display: inline-block;
+      color: var(--neon-cyan);
+      text-decoration: none;
+      border-bottom: 1px solid var(--neon-cyan);
+      padding-bottom: 0.2rem;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .expanded-link:hover {
+      color: var(--neon-pink);
+      border-bottom-color: var(--neon-pink);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--neon-cyan);
+      font-size: 1.2rem;
+      grid-column: 1 / -1;
+    }
+
+    .new-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--neon-pink);
+      color: var(--darker-bg);
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .notification-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .expanded-content {
+        padding: 1rem;
+      }
+      
+      .expanded-title {
+        font-size: 1.4rem;
+      }
+    }

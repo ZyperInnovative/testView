@@ -1,0 +1,111 @@
+:root {
+            --pw-reset-primary: #00a8ff;
+            --pw-reset-dark: #121212;
+            --pw-reset-light: #f0f0f0;
+            --pw-reset-error: #ff5e62;
+            }
+             
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Rajdhani', sans-serif;
+      color: #e0e0e0;
+      overflow: hidden;
+      position: relative;
+      padding:10%;
+      }
+        /* Unique CSS classes prefixed with pw- */
+        .pw-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .pw-modal-container {
+            background-color: #121212;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid #00a8ff;
+            position: relative;
+        }
+        
+        .pw-modal-title {
+            color: #00a8ff;
+            margin: 0 0 1.5rem 0;
+            text-align: center;
+        }
+        
+        .pw-input-field {
+            background-color: rgba(0, 168, 255, 0.05);
+            border: 1px solid #00a8ff;
+            color: #f0f0f0;
+            padding: 0.8rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .pw-submit-btn {
+            background: transparent;
+            border: 1px solid #00a8ff;
+            color: #00a8ff;
+            padding: 0.8rem;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .pw-error-msg {
+            color: #ff5e62;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 1.5rem;
+        }
+        
+        .pw-success-msg {
+            color: #00a8ff;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .pw-info-note {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .pw-close-btn {
+            background: none;
+            border: none;
+            color: #aaaaaa;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .pw-trigger {
+            color: #00a8ff;
+            text-decoration: none;
+            
+            
+        }

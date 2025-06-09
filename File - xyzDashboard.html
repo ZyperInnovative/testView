@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantum Crypto Dashboard</title>
+  <script src="https://s3.tradingview.com/tv.js"></script>
+  <link rel="stylesheet" href="xyzDashboard.css">
+  </head>
+  <div class="container">      
+      <div class="user-email" id="user-email">user@quantumwallet.com</div>
+      <div class="dashboard-balance">
+          <h1>Quantum Wallet</h1>
+          <div class="balance-value" id="dashboard-balance">0.00</div>
+      </div>
+      <div class="tabs">
+          <button class="tab-button">Send</button>
+          <button class="tab-button">Receive</button>
+          <button class="tab-button">Buy</button>
+      </div>
+      <div class="crypto-grid">
+          <div class="crypto-row crypto-row-header">
+              <div></div>
+              
+              <div class="column-header">Price</div>
+              <div class="column-header">Balance</div>
+              <div class="column-header">Value</div>
+          </div>
+          <div class="crypto-row" id="xyz-row">
+              <div><img src="https://donationsanctuary.wordpress.com/wp-content/uploads/2024/11/wp-1732240875228.gif" alt="XYZ" class="crypto-logo"></div>
+              <div class="crypto-value">$1.00</div>
+              <div class="crypto-value" id="xyz-balance">0</div>
+              <div class="crypto-value" id="xyz-value">0</div>
+          </div>
+          <div class="crypto-row" id="sol-row">
+              <div><img src="https://donationsanctuary.wordpress.com/wp-content/uploads/2025/05/solana-sol-logo5864824887087660793.png" alt="Solana" class="crypto-logo"></div>
+              <div class="crypto-value" id="solana-price">$0.00</div>
+              <div class="crypto-value" id="solana-balance">0</div>
+              <div class="crypto-value" id="solana-value">0</div>
+          </div>
+          <div class="crypto-row" id="btc-row">
+              <div><img src="https://donationsanctuary.wordpress.com/wp-content/uploads/2025/05/bitcoin-btc-logo8836248237636424496.png" alt="Bitcoin" class="crypto-logo"></div>
+              <div class="crypto-value" id="bitcoin-price">$0.00</div>
+              <div class="crypto-value" id="bitcoin-balance">0</div>
+              <div class="crypto-value" id="bitcoin-value">0</div>
+          </div>
+      </div>
+  </div>
+  <h4>News and Updates</h4>
+  <div id="notification-wrapper" class="notification-wrapper"></div>
+
+
+  
+  <div class="container1">
+      <h3>TRANSACTION HISTORY</h3>        
+      <div class="history" id="transaction-history">
+          <div class="transaction">
+              <span></span>
+              <span></span>
+          </div>
+          <div class="transaction">
+              <span></span>
+              <span></span>
+          </div>
+          <div class="transaction">
+              <span></span>
+              <span></span>
+          </div>
+          <div class="transaction">
+              <span></span>
+              <span></span>
+          </div>
+       </div>
+       <a href="xyzBlockchainExplorer.html">View Blockchain </a>
+       
+  </div>
+           
+  <!-- Chart Modals -->
+  <div class="chart-modal" id="xyz-chart-modal">
+    <div class="chart-container">
+      <div class="chart-header">
+        <div class="chart-title">
+          <img src="https://donationsanctuary.wordpress.com/wp-content/uploads/2024/11/wp-1732240875228.gif" alt="XYZ" class="chart-logo">
+          <span>XYZ/USDT</span>
+        </div>
+        <button class="close-chart">&times;</button>
+      </div>
+      <div class="tradingview-widget-container">
+        <div id="xyz-tradingview-chart"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-modal" id="sol-chart-modal">
+    <div class="chart-container">
+      <div class="chart-header">
+        <div class="chart-title">
+          <img src="https://donationsanctuary.wordpress.com/wp-content/uploads/2025/05/solana-sol-logo5864824887087660793.png" alt="Solana" class="chart-logo">
+          <span>SOL/USDT</span>
+        </div>
+        <button class="close-chart">&times;</button>
+      </div>
+      <div class="tradingview-widget-container">
+        <div id="sol-tradingview-chart"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-modal" id="btc-chart-modal">
+    <div class="chart-container">
+      <div class="chart-header">
+        <div class="chart-title">
+          <img src="https://donationsanctuary.wordpress.com/wp-content/uploads/2025/05/bitcoin-btc-logo8836248237636424496.png" alt="Bitcoin" class="chart-logo">
+          <span>BTC/USDT</span>
+        </div>
+        <button class="close-chart">&times;</button>
+      </div>
+      <div class="tradingview-widget-container">
+        <div id="btc-tradingview-chart"></div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="xyzDashboard.js"></script>
+  
+  </body>
+</html>

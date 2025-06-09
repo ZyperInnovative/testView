@@ -1,0 +1,154 @@
+:root {
+        --neon-blue: #00f7ff;
+        --neon-blue-dim: rgba(0, 247, 255, 0.7);
+        --offline-red: #ff0000;
+        --offline-red-dim: rgba(255, 0, 0, 0.7);
+        --dark-bg: #0a0a14;
+        --darker-bg: #050510;
+        --border-color: rgba(0, 247, 255, 0.3);
+        --border-color-offline: rgba(255, 0, 0, 0.3);
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: var(--darker-bg);
+        font-family: 'Courier New', monospace;
+        color: var(--neon-blue-dim);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        
+    }
+    
+    body.offline {
+        color: var(--offline-red-dim);
+    }
+    
+    /* Header Section */
+    .header-container {
+        padding: 15px 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: var(--neon-blue);
+        letter-spacing: 1px;
+        transition: color 0.3s ease;
+    }
+    
+    .offline .logo {
+        color: var(--offline-red);
+    }
+    
+    .header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+    }
+    
+    .last-updated {
+        font-size: 13px;
+        opacity: 0.9;
+    }
+    
+    #connectionStatus {
+        font-size: 13px;
+        padding: 3px 8px;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    .offline #connectionStatus {
+        border: 1px solid var(--border-color-offline);
+    }
+    
+    /* Sphere Visualization Section */
+    .sphere-container {
+        flex: 1;
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #sphere-canvas {
+        width: 100%;
+        height: 100%;
+    }
+    
+/* Dashboard Section */
+.dashboard-container {
+    padding: 0 20px 25px;
+    overflow-x: auto; /* Enables horizontal scroll if needed */
+   width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 15px;
+    min-width: 340px; /* Prevent full collapse on very small screens */
+    width: max-content; /* Allows horizontal scrolling on overflow */
+    margin-bottom:40%;
+}
+
+.metric {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    max-width: 150px;
+     box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+}
+
+.offline .metric {
+    border: 1px solid var(--border-color-offline);
+}
+
+.metric h3 {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--neon-blue);
+    transition: color 0.3s ease;
+}
+
+.metric-value {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: var(--neon-blue);
+    transition: color 0.3s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.offline .metric-value {
+    color: var(--offline-red);
+}
+
+.mining-rate {
+    font-size: 11px;
+    opacity: 0.9;
+    margin-top: 6px;
+    line-height: 1.4;
+}    
+    #solNotification {
+        font-size: 11px;
+        margin-top: 6px;
+        opacity: 0.8;
+    }
