@@ -200,3 +200,20 @@
     document.getElementById('closeBtn').addEventListener('click', function() {
         document.getElementById('floatingContainer').style.display = 'none';
     });
+
+   // Check if both xyzEmailAccess and xyzUidAccess exist in localStorage
+const email = localStorage.getItem("xyzEmailAccess");
+const uid = localStorage.getItem("xyzUidAccess");
+
+// If both exist, redirect to the desired URL
+if (email && uid) {
+  window.location.href = "xyzDashboard.html"; // Replace with your redirect link
+}
+ document.getElementById('pwTrigger').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('floatingContainer').style.display = 'block';
+    });
+
+    document.getElementById('closeBtn').addEventListener('click', function() {
+        document.getElementById('floatingContainer').style.display = 'none';
+    });
