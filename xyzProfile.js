@@ -167,7 +167,7 @@
                 // Remove local storage items
                 localStorage.removeItem('xyzEmailAccess');
                  // Redirect to login page (change URL as needed)
-                window.location.href = 'tryn.html';
+                window.location.href = 'xyzLogIn.html';
             } catch (error) {
                 console.error("Error during logout:", error);
                 alert("Error during logout. Please try again.");
@@ -220,7 +220,7 @@ const uid = localStorage.getItem("xyzUidAccess");
 
 // Redirect to login if either email or UID is missing
 if (!email || !uid) {
-  window.location.href = "tryn.html"; // Replace with your login URL
+  window.location.href = "xyzLogIn.html"; // Replace with your login URL
 }
 
  function createFuturisticNav() {
