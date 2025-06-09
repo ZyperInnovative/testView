@@ -69,13 +69,14 @@
 
         // Update UI with user data
         function updateUI(userData) {
-            userNameElement.textContent = userData.userName || "Anonymous";
-            userIDElement.textContent = `ID: ${userData.userID || userUID}`;
-            emailElement.textContent = userData.email || userEmail || "No email";
-            xyzAddressElement.textContent = userData.xyzAddress || "Not set";
-            xyzReferralsElement.textContent = userData.xyzReferrals || "0";
-        }
-
+    userNameElement.textContent = userData.userName || "Anonymous";
+    userIDElement.textContent = `ID: ${userData.userID || userUID}`;
+    emailElement.textContent = userData.email || userEmail || "No email";
+    xyzAddressElement.textContent = userData.xyzAddress || "Not set";
+      
+    // Initialize referral link with user data
+    initReferralLink(userData);
+}
         // Generate avatar based on user name
         function updateAvatar(userName) {
             if (!userName) return;
@@ -387,4 +388,39 @@ if (!email || !uid) {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', createFuturisticNav);
+
+// Initialize referral link functionality
+function initReferralLink(userData) {
+    const referralLinkElement = document.getElementById('referralLink');
+    const copyReferralBtn = document.getElementById('copyReferralBtn');
+    
+    // Determine the referral identifier (username or userID)
+    let referralIdentifier = "";
+    if (userData && userData.userName) {
+        referralIdentifier = userData.userName;
+    } else if (userData && userData.userID) {
+        referralIdentifier = userData.userID;
+    } else {
+        referralIdentifier = userUID || "user";
+    }
+    
+    // Create the referral link
+    const referralLink = `xyzinnovagence.xyz/xyzSignUp?ref=${encodeURIComponent(referralIdentifier)}`;
+    referralLinkElement.textContent = referralLink;
+    
+    // Set up copy functionality
+    copyReferralBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(referralLink)
+            .then(() => {
+                copyReferralBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyReferralBtn.textContent = 'Copy Referral Link';
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Failed to copy referral link:', err);
+                alert('Failed to copy link. Please try again.');
+            });
+    });
+}
 
