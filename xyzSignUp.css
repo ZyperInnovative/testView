@@ -240,3 +240,8 @@
         text-decoration: none;
         cursor: pointer;
     }
+.signup-container input[readonly] {
+    background: rgba(0, 247, 255, 0.1);
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+}
