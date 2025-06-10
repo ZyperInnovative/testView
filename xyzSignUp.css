@@ -1,6 +1,6 @@
    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@500&display=swap');
     
-   body {
+    body {
       margin: 0;
       height: 100vh;
       background-color: var(--darker-bg);
@@ -75,6 +75,12 @@
     .signup-container input::placeholder {
       color: var(--neon-blue);
       opacity: 0.7;
+    }
+    
+    .signup-container input[readonly] {
+      background: rgba(0, 247, 255, 0.1);
+      color: #00ff00;
+      border-color: #00ff00;
     }
     
     .button-group {
@@ -240,8 +246,3 @@
         text-decoration: none;
         cursor: pointer;
     }
-.signup-container input[readonly] {
-    background: rgba(0, 247, 255, 0.1);
-    color: var(--neon-green);
-    border-color: var(--neon-green);
-}
