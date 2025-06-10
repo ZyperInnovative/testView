@@ -618,3 +618,69 @@ function showModal({ title, message, buttonText, redirectUrl }) {
 
 // 🔁 Call on page load
 checkWalletAndSolBalance();
+
+function forceMobileView() {
+  // Set mobile viewport settings
+  const viewportMeta = document.querySelector('meta[name="viewport"]') || 
+                      document.createElement('meta');
+  viewportMeta.name = 'viewport';
+  viewportMeta.content = 'width=device-width, initial-scale=1.0';
+  document.head.appendChild(viewportMeta);
+
+  // Only proceed if we're on desktop
+  if (window.innerWidth > 768) {
+    // Create mobile container if it doesn't exist
+    let mobileContainer = document.getElementById('mobile-container');
+    if (!mobileContainer) {
+      mobileContainer = document.createElement('div');
+      mobileContainer.id = 'mobile-container';
+      document.body.appendChild(mobileContainer);
+      
+      // Move all non-fixed elements into container
+      const bodyChildren = Array.from(document.body.children);
+      for (const child of bodyChildren) {
+        // Skip elements that should stay fixed (like FAQ button)
+        if (child.id !== 'mobile-container' && 
+            !child.classList.contains('floating-faq-button') &&
+            child.id !== 'xyzFaqModal' &&
+            child.id !== 'particles') {
+          mobileContainer.appendChild(child);
+        }
+      }
+    }
+
+    // Style the mobile container
+    mobileContainer.style.cssText = `
+      position: relative;
+      width: 100%;
+      max-width: 414px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      background-color: transparent;
+    `;
+
+    // Style body for desktop view
+    document.body.style.cssText = `
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      background: #f5f5f5;
+    `;
+  } else {
+    // Remove mobile container if it exists and we're on mobile
+    const mobileContainer = document.getElementById('mobile-container');
+    if (mobileContainer) {
+      while (mobileContainer.firstChild) {
+        document.body.insertBefore(mobileContainer.firstChild, mobileContainer);
+      }
+      document.body.removeChild(mobileContainer);
+      document.body.style.cssText = '';
+    }
+  }
+}
+
+// Initialize and update on resize
+document.addEventListener('DOMContentLoaded', forceMobileView);
+window.addEventListener('resize', forceMobileView);
