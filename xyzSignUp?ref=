@@ -4,8 +4,257 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quantum Sign-Up Portal</title>
-  <link rel="stylesheet" href="xyzSignUp.css">
-  </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@500&display=swap');
+    
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: var(--darker-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Rajdhani', sans-serif;
+      color: #e0e0e0;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Quantum background animation */
+    #quantumCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      opacity: 0.7;
+    }
+    
+    .signup-container {
+      background: var(--glass-bg);
+      border: 1px solid var(--neon-blue);
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+      width: 350px;
+      backdrop-filter: blur(5px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .signup-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    }
+    
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-blue);
+      text-shadow: 0 0 5px var(--neon-blue);
+      letter-spacing: 2px;
+    }
+    
+    .signup-container input {
+      width: 90%;
+      padding: 12px 15px;
+      margin: 8px 0;
+      background: rgba(10, 0, 30, 0.3);
+      border: 1px solid var(--neon-blue);
+      border-radius: 3px;
+      color: var(--neon-blue);
+      font-size: 14px;
+      font-family: 'Rajdhani', sans-serif;
+      transition: all 0.3s;
+    }
+    
+    .signup-container input:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+      background: rgba(15, 0, 40, 0.4);
+    }
+    
+    .signup-container input::placeholder {
+      color: var(--neon-blue);
+      opacity: 0.7;
+    }
+    
+    .signup-container input[readonly] {
+      background: rgba(0, 247, 255, 0.1);
+      color: #00ff00;
+      border-color: #00ff00;
+    }
+    
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .button-group button, .button-group a {
+      padding: 12px;
+      border: none;
+      border-radius: 3px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+    
+    .button-group button {
+      background: var(--neon-blue);
+      color: #000;
+    }
+    
+    .button-group button:hover {
+      background: #00d7df;
+      box-shadow: 0 0 15px rgba(0, 247, 255, 0.7);
+    }
+    
+    .button-group a {
+      background: rgba(0, 247, 255, 0.2);
+      color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
+    }
+    
+    .button-group a:hover {
+      background: rgba(0, 247, 255, 0.3);
+      box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+    }
+    
+    /* Quantum connection status */
+    .connection-pulse {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--neon-blue);
+      border-radius: 50%;
+      box-shadow: 0 0 5px var(--neon-blue);
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 0.3; transform: scale(0.8); }
+    }
+    
+    :root {
+        --neon-blue: #00f7ff;
+        --neon-purple: #a777e3;
+        --neon-pink: #ff00ff;
+        --dark-bg: #0a0a14;
+        --darker-bg: #050510;
+        --glass-bg: rgba(15, 15, 35, 0.7);
+        --pw-reset-primary: var(--neon-blue);
+        --pw-reset-dark: var(--dark-bg);
+        --pw-reset-light: #f0f0f0;
+        --pw-reset-error: #ff5e62;
+    }
+    
+    .pw-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .pw-modal-container {
+        background-color: var(--dark-bg);
+        padding: 2rem;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 400px;
+        border: 1px solid var(--neon-blue);
+        position: relative;
+    }
+    
+    .pw-modal-title {
+        color: var(--neon-blue);
+        margin: 0 0 1.5rem 0;
+        text-align: center;
+    }
+    
+    .pw-input-field {
+        background-color: rgba(0, 247, 255, 0.05);
+        border: 1px solid var(--neon-blue);
+        color: #f0f0f0;
+        padding: 0.8rem;
+        width: 100%;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+    }
+    
+    .pw-submit-btn {
+        background: transparent;
+        border: 1px solid var(--neon-blue);
+        color: var(--neon-blue);
+        padding: 0.8rem;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+    
+    .pw-error-msg {
+        color: #ff5e62;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        min-height: 1.5rem;
+    }
+    
+    .pw-success-msg {
+        color: var(--neon-blue);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .pw-info-note {
+        color: #aaaaaa;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+        text-align: center;
+        line-height: 1.4;
+    }
+    
+    .pw-close-btn {
+        background: none;
+        border: none;
+        color: #aaaaaa;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    
+    .pw-trigger {
+        color: var(--neon-blue);
+        text-decoration: none;
+        cursor: pointer;
+    }
+  </style>
+</head>
 <body>
   <canvas id="quantumCanvas"></canvas>
   
@@ -22,13 +271,13 @@
       
       <div class="button-group">
         <button type="submit">INITIALIZE ACCOUNT</button>
-        <a href="xyzLogIn.html">EXISTING USER ACCESS</a>
-         </div>
+        <a href="tryn.html">EXISTING USER ACCESS</a>
+      </div>
          
-<p><a href="#" id="pwTrigger" class="pw-trigger">Forgot Password?</a></p>
-     </div>
-     </form>
+      <p><a href="#" id="pwTrigger" class="pw-trigger">Forgot Password?</a></p>
+    </form>
   </div>
+  
   <div id="floatingContainer" style="
     display: none;
     position: fixed;
@@ -44,7 +293,7 @@
     z-index: 9999;
     padding: 10px;
     border-radius: 8px;
-">
+  ">
     <button id="closeBtn" style="
         float: right;
         background: red;
@@ -55,8 +304,244 @@
         border-radius: 4px;
     ">Close</button>
     <iframe src="xyzForgotPass.html" style="width:100%; height: 90%; border: none;"></iframe>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script type="module" src="xyzSignUp.js"></script>
+  </div>
+   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module">
+    // Quantum background animation
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('quantumCanvas'), antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // Quantum core
+    const coreGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+    const coreMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0x00ff00,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.2
+    });
+    const quantumCore = new THREE.Mesh(coreGeometry, coreMaterial);
+    scene.add(quantumCore);
+    
+    // Qubits
+    const qubits = [];
+    const qubitCount = 80;
+    const qubitGeometry = new THREE.SphereGeometry(0.03, 6, 6);
+    const qubitMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    
+    for (let i = 0; i < qubitCount; i++) {
+      const qubit = new THREE.Mesh(qubitGeometry, qubitMaterial);
+      const radius = 2 + Math.random() * 3;
+      const theta = Math.random() * Math.PI * 2;
+      
+      qubit.position.x = radius * Math.sin(theta);
+      qubit.position.z = radius * Math.cos(theta);
+      qubit.position.y = (Math.random() - 0.5) * 4;
+      
+      qubit.userData = {
+        speed: 0.002 + Math.random() * 0.003,
+        angle: Math.random() * Math.PI * 2,
+        radius: radius
+      };
+      
+      scene.add(qubit);
+      qubits.push(qubit);
+    }
+    
+    // Connection lines
+    const lines = [];
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, transparent: true, opacity: 0.1 });
+    
+    for (let i = 0; i < 15; i++) {
+      const start = qubits[Math.floor(Math.random() * qubits.length)].position;
+      const end = qubits[Math.floor(Math.random() * qubits.length)].position;
+      
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints([start, end]);
+      const line = new THREE.Line(lineGeometry, lineMaterial);
+      scene.add(line);
+      lines.push({ line, start, end });
+    }
+    
+    camera.position.z = 8;
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      quantumCore.rotation.x += 0.003;
+      quantumCore.rotation.y += 0.005;
+      
+      qubits.forEach(qubit => {
+        qubit.userData.angle += qubit.userData.speed;
+        qubit.position.x = qubit.userData.radius * Math.sin(qubit.userData.angle);
+        qubit.position.z = qubit.userData.radius * Math.cos(qubit.userData.angle);
+        qubit.position.y = Math.sin(qubit.userData.angle * 3) * 2;
+      });
+      
+      lines.forEach(conn => {
+        conn.line.geometry.setFromPoints([conn.start, conn.end]);
+      });
+      
+      renderer.render(scene, camera);
+    }
+    
+    animate();
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+    
+
+    // Firebase integration
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDIwoUIMJrJQeLBD9vijsfIUXG9BgaGSPs",
+      authDomain: "miner-zyx.firebaseapp.com",
+      projectId: "miner-zyx",
+      storageBucket: "miner-zyx.firebasestorage.app",
+      messagingSenderId: "430019680448",
+      appId: "1:430019680448:web:d066b8aaf4355907e1b525",
+      measurementId: "G-V6SDWYH6M2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    function generateXyzAddress() {
+      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      const xyzLetters = ['x', 'y', 'z'];
+
+      let address = '';
+      address += xyzLetters[Math.floor(Math.random() * xyzLetters.length)]; // first
+
+      for (let i = 1; i < 11; i++) {
+        address += chars[Math.floor(Math.random() * chars.length)];
+      }
+
+      address += xyzLetters[Math.floor(Math.random() * xyzLetters.length)]; // middle
+
+      for (let i = 12; i < 23; i++) {
+        address += chars[Math.floor(Math.random() * chars.length)];
+      }
+
+      address += xyzLetters[Math.floor(Math.random() * xyzLetters.length)]; // last
+
+      return address;
+    }
+
+    // Function to parse referral code from URL
+    function getReferralCodeFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('ref') || '';
+    }
+
+    // Auto-fill referral code on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const referralCodeInput = document.getElementById('referralCode');
+        const refCode = getReferralCodeFromURL();
+        
+        if (refCode) {
+            referralCodeInput.value = refCode;
+            referralCodeInput.readOnly = true;
+        }
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("signup-form");
+      
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const fullName = document.getElementById("fullName").value.trim();
+        const userName = document.getElementById("userName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        let referralCode = document.getElementById("referralCode").value.trim();
+        
+        // If referral code is empty, check URL again (in case user cleared it)
+        if (!referralCode) {
+            referralCode = getReferralCodeFromURL();
+        }
+
+        if (password !== confirmPassword) {
+          alert("Encryption keys do not match.");
+          return;
+        }
+
+        try {
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          const xyzAddress = generateXyzAddress();
+
+          await setDoc(doc(db, "users", user.uid), {
+            userID: user.uid,
+            userName: userName,
+            xyzAddress: xyzAddress,
+            xyzReferrer: referralCode || "",
+            xyzBalance: 0,
+            solBalance: 0,
+            xyzReferrals: [],
+            xyzTransactions: [],
+          });
+
+          await user.getIdToken(true);
+
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            localStorage.setItem("xyzUidAccess", userData.userID);
+            localStorage.setItem("xyzEmailAccess", email);
+          }
+
+          await setDoc(doc(db, "documentXYZ", user.uid), {
+            userID: user.uid,
+            email: email,
+            userName: userName,
+            xyzAddress: xyzAddress,
+            xyzReferrer: referralCode || "",
+            xyzBalance: 0,
+            solBalance: 0,
+            xyzReferrals: [],
+            xyzTransactions: "",
+          });
+
+          window.location.href = "xyzDashboard.html";
+          alert("Quantum account initialized successfully!");
+        } catch (error) {
+          console.error("Sign-up error:", error);
+          alert("Quantum initialization failed: " + error.message);
+        }
+      });
+    });
+
+    document.getElementById('pwTrigger').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('floatingContainer').style.display = 'block';
+    });
+
+    document.getElementById('closeBtn').addEventListener('click', function() {
+        document.getElementById('floatingContainer').style.display = 'none';
+    });
+    
+    // Check if both xyzEmailAccess and xyzUidAccess exist in localStorage
+    const email = localStorage.getItem("xyzEmailAccess");
+    const uid = localStorage.getItem("xyzUidAccess");
+
+    // If both exist, redirect to the desired URL
+    if (email && uid) {
+      window.location.href = "xyzDashboard.html";
+    }
+  </script>
 </body>
 </html>
