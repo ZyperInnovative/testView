@@ -129,7 +129,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
         return;
       }
 
-      const confirm = window.confirm(`Please confirm this is your correct Solana wallet address:\n\n${newAddress}\n\nYou will NOT be able to change it after confirmation.`);
+ const confirm = window.confirm(`Please confirm this is your correct Solana wallet address:\n\n${newAddress}\n\nYou will NOT be able to change it after confirmation.`);
       if (!confirm) return;
 
       confirmSpinner.classList.add('active');
@@ -264,25 +264,37 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
       }
     });
     
-    
-// Redirect to login if either email or UID is missing
-if (!email || !uid) {
-  window.location.href = "tryn.html"; // Replace with your login URL
-}
-const toggleBtn = document.getElementById('faqToggleBtn');
-  const faqBox = document.getElementById('faqBox');
-  const questions = document.querySelectorAll('.faq-question');
+    // Redirect to login if either email or UID is missing
+    if (!email || !uid) {
+      window.location.href = "tryn.html"; // Replace with your login URL
+    }
 
-  toggleBtn.addEventListener('click', () => {
-    faqBox.style.display = faqBox.style.display === 'block' ? 'none' : 'block';
-  });
+    // FAQ Toggle Functionality
+    const toggleBtn = document.getElementById('faqToggleBtn');
+    const faqBox = document.getElementById('faqBox');
+    const questions = document.querySelectorAll('.faq-question');
 
-  questions.forEach(q => {
-    q.addEventListener('click', () => {
-      q.classList.toggle('active');
-      const icon = q.querySelector('.faq-icon');
-      icon.textContent = q.classList.contains('active') ? '−' : '+';
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      faqBox.style.display = faqBox.style.display === 'block' ? 'none' : 'block';
     });
-  });
 
+    questions.forEach(q => {
+      q.addEventListener('click', () => {
+        q.classList.toggle('active');
+        const icon = q.querySelector('.faq-icon');
+        icon.textContent = q.classList.contains('active') ? '−' : '+';
+      });
+    });
 
+    // Close FAQ when clicking outside
+  document.addEventListener('click', (e) => {
+  if (!faqBox.contains(e.target) && e.target !== toggleBtn) {
+    faqBox.style.display = 'none';
+  }
+});
+
+    // Prevent FAQ from closing when clicking inside it
+    faqBox.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
