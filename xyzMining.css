@@ -99,6 +99,7 @@
     min-width: 340px; /* Prevent full collapse on very small screens */
     width: max-content; /* Allows horizontal scrolling on overflow */
     margin-bottom:40%;
+margin: 0 auto 20px;
 }
 
 .metric {
