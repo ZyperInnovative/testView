@@ -1,4 +1,4 @@
- // Quantum background animation
+// Quantum background animation
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('quantumCanvas'), antialias: true });
@@ -84,8 +84,9 @@
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
+    
 
-    // Firebase integration (unchanged from your original)
+    // Firebase integration
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
@@ -126,39 +127,40 @@
       return address;
     }
 
-     window.addEventListener("DOMContentLoaded", () => {
+    // Function to parse referral code from URL
+    function getReferralCodeFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('ref') || '';
+    }
+
+    // Auto-fill referral code on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const referralCodeInput = document.getElementById('referralCode');
+        const refCode = getReferralCodeFromURL();
+        
+        if (refCode) {
+            referralCodeInput.value = refCode;
+            referralCodeInput.readOnly = true;
+        }
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("signup-form");
-     // Function to parse referral code from URL
-function getReferralCodeFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('ref') || '';
-}
-
-// Auto-fill referral code if present in URL
-window.addEventListener("DOMContentLoaded", () => {
-    const referralCodeInput = document.getElementById('referralCode');
-    const refCode = getReferralCodeFromURL();
-    
-    if (refCode) {
-        referralCodeInput.value = refCode;
-        // Optional: Make the field read-only if you want to prevent changes
-        // referralCodeInput.readOnly = true;
-    }
-});
+      
       form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const fullName = document.getElementById("fullName").value.trim();
-    const userName = document.getElementById("userName").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    let referralCode = document.getElementById("referralCode").value.trim();
-    
-    // If referral code is empty, check URL again (in case user cleared it)
-    if (!referralCode) {
-        referralCode = getReferralCodeFromURL();
-    }
+        const fullName = document.getElementById("fullName").value.trim();
+        const userName = document.getElementById("userName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        let referralCode = document.getElementById("referralCode").value.trim();
+        
+        // If referral code is empty, check URL again (in case user cleared it)
+        if (!referralCode) {
+            referralCode = getReferralCodeFromURL();
+        }
 
         if (password !== confirmPassword) {
           alert("Encryption keys do not match.");
@@ -180,7 +182,6 @@ window.addEventListener("DOMContentLoaded", () => {
             solBalance: 0,
             xyzReferrals: [],
             xyzTransactions: [],
-            
           });
 
           await user.getIdToken(true);
@@ -213,6 +214,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+
     document.getElementById('pwTrigger').addEventListener('click', function(event) {
         event.preventDefault();
         document.getElementById('floatingContainer').style.display = 'block';
@@ -221,20 +223,12 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById('closeBtn').addEventListener('click', function() {
         document.getElementById('floatingContainer').style.display = 'none';
     });
+    
+    // Check if both xyzEmailAccess and xyzUidAccess exist in localStorage
+    const email = localStorage.getItem("xyzEmailAccess");
+    const uid = localStorage.getItem("xyzUidAccess");
 
-   // Check if both xyzEmailAccess and xyzUidAccess exist in localStorage
-const email = localStorage.getItem("xyzEmailAccess");
-const uid = localStorage.getItem("xyzUidAccess");
-
-// If both exist, redirect to the desired URL
-if (email && uid) {
-  window.location.href = "xyzDashboard.html"; // Replace with your redirect link
-}
- document.getElementById('pwTrigger').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('floatingContainer').style.display = 'block';
-    });
-
-    document.getElementById('closeBtn').addEventListener('click', function() {
-        document.getElementById('floatingContainer').style.display = 'none';
-    });
+    // If both exist, redirect to the desired URL
+    if (email && uid) {
+      window.location.href = "xyzDashboard.html";
+    }
