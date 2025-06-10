@@ -471,3 +471,90 @@ h3 {
  text-align:center;
     
 }
+#ds_notif_container_xyz {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            z-index: 1000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Individual notification styling with unique class */
+        .ds_notif_item_xyz {
+            position: relative;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background:white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: #333;
+            display: flex;
+            align-items: center;
+            transform: translateX(100%);
+            opacity: 0;
+            animation: ds_slideIn_xyz 0.3s forwards, ds_fadeOut_xyz 0.5s forwards 3s;
+        }
+        
+        /* Notification icon with unique class */
+        .ds_notif_icon_xyz {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        /* Notification content with unique class */
+        .ds_notif_content_xyz {
+            flex: 1;
+        }
+        
+        /* Notification title with unique class */
+        .ds_notif_title_xyz {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        /* Notification message with unique class */
+        .ds_notif_message_xyz {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        /* Close button with unique class */
+        .ds_notif_close_xyz {
+            margin-left: 10px;
+            cursor: pointer;
+            color: #999;
+            font-size: 16px;
+        }
+        
+        /* Different notification types with unique classes */
+        .ds_notif_info_xyz {
+            border-left: 4px solid #3498db;
+        }
+        
+        .ds_notif_warning_xyz {
+            border-left: 4px solid #f39c12;
+        }
+        
+        .ds_notif_error_xyz {
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .ds_notif_success_xyz {
+            border-left: 4px solid #2ecc71;
+        }
+        
+        /* Unique animation names */
+        @keyframes ds_slideIn_xyz {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes ds_fadeOut_xyz {
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
