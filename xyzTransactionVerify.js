@@ -269,4 +269,20 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 if (!email || !uid) {
   window.location.href = "tryn.html"; // Replace with your login URL
 }
+const toggleBtn = document.getElementById('faqToggleBtn');
+  const faqBox = document.getElementById('faqBox');
+  const questions = document.querySelectorAll('.faq-question');
+
+  toggleBtn.addEventListener('click', () => {
+    faqBox.style.display = faqBox.style.display === 'block' ? 'none' : 'block';
+  });
+
+  questions.forEach(q => {
+    q.addEventListener('click', () => {
+      q.classList.toggle('active');
+      const icon = q.querySelector('.faq-icon');
+      icon.textContent = q.classList.contains('active') ? '−' : '+';
+    });
+  });
+
 
