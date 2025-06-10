@@ -506,7 +506,7 @@ async function checkWalletAndSolBalance() {
       title: "🪙 No Solana Wallet Bound",
       message: "You don't have a wallet. Bind and deposit at least ≥$5 SOL to start mining and transactions. Make sure you don't lose your wallet because we will reflect and refund all your deposits to your registered Solana wallet address. We will also add something on TGE.",
       buttonText: "Go to Bind & Deposit",
-      redirectUrl: "xyzTransactionsVerify.html" 
+      redirectUrl: "xyzTransactionVerify.html" 
     });
   } else if (solBalance === 0) {
     showModal({
