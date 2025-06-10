@@ -626,18 +626,3 @@
         padding: 0 15px 15px 45px;
         font-size: 0.9rem;
     }
-/* Ensure FAQ button stays above mobile container */
-.floating-faq-button, #xyzFaqModal {
-  z-index: 10000 !important; /* Higher than mobile container */
-}
-
-/* Mobile container should not intercept clicks for fixed elements */
-#mobile-container {
-  pointer-events: none;
-}
-
-/* But content inside should be clickable */
-#mobile-container > * {
-  pointer-events: auto;
-}
-}
