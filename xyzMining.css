@@ -84,22 +84,24 @@
         height: 100%;
     }
     
+    
 /* Dashboard Section */
 .dashboard-container {
     padding: 0 20px 25px;
+    margin: 0 auto 20px;
     overflow-x: auto; /* Enables horizontal scroll if needed */
    width: 100%;
     box-sizing: border-box;
 }
 
 .dashboard {
+margin: 0 auto 20px;
     display: grid;
     grid-template-columns: repeat(2, minmax(160px, 1fr));
     gap: 15px;
     min-width: 340px; /* Prevent full collapse on very small screens */
     width: max-content; /* Allows horizontal scrolling on overflow */
     margin-bottom:40%;
-margin: 0 auto 20px;
 }
 
 .metric {
