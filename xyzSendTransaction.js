@@ -294,3 +294,65 @@ document.getElementById("modalRecipientEmail").textContent = maskEmail(recipient
         });
     });
 });
+// Override the default alert function
+        (function() {
+            const originalAlert = window.alert;
+            
+            window.alert = function(message) {
+                ds_createNotification_xyz(message, 'info');
+            };
+            
+            // Create a beautiful notification
+            function ds_createNotification_xyz(message, type = 'info') {
+                const container = document.getElementById('ds_notif_container_xyz');
+                
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `ds_notif_item_xyz ds_notif_${type}_xyz`;
+                
+                // Determine icon based on type
+                let icon;
+                switch(type) {
+                    case 'warning':
+                        icon = '⚠️';
+                        break;
+                    case 'error':
+                        icon = '❌';
+                        break;
+                    case 'success':
+                        icon = '✅';
+                        break;
+                    default:
+                        icon = 'ℹ️';
+                }
+                
+                // Notification content
+                notification.innerHTML = `
+                    <span class="ds_notif_icon_xyz">${icon}</span>
+                    <div class="ds_notif_content_xyz">
+                        <div class="ds_notif_title_xyz">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+                        <div class="ds_notif_message_xyz">${message}</div>
+                    </div>
+                    <span class="ds_notif_close_xyz">&times;</span>
+                `;
+                
+                // Add close functionality
+                notification.querySelector('.ds_notif_close_xyz').addEventListener('click', () => {
+                    notification.style.animation = 'ds_fadeOut_xyz 0.5s forwards';
+                    setTimeout(() => notification.remove(), 500);
+                });
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'ds_fadeOut_xyz 0.5s forwards';
+                    setTimeout(() => notification.remove(), 500);
+                }, 5000);
+                
+                // Add to container
+                container.appendChild(notification);
+            }
+            
+            // Make the function available globally with unique name
+            window.ds_createNotification_xyz = ds_createNotification_xyz;
+            
+                    })();
