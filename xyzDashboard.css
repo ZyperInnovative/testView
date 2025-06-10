@@ -370,10 +370,12 @@
         from { opacity: 0; }
         to { opacity: 1; }
     }
-    .notification-wrapper {
+       .notification-wrapper {
     margin-bottom: 0px;
     height: 60px;
     overflow: hidden;
+    max-width: 480px;
+    margin: 0 auto 20px;
 }
 
 .notification-card {
