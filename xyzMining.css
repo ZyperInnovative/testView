@@ -1,4 +1,4 @@
-:root {
+  :root {
         --neon-blue: #00f7ff;
         --neon-blue-dim: rgba(0, 247, 255, 0.7);
         --offline-red: #ff0000;
@@ -83,7 +83,6 @@
         width: 100%;
         height: 100%;
     }
-    
     
 /* Dashboard Section */
 .dashboard-container {
