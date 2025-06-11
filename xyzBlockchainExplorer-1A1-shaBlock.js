@@ -416,16 +416,16 @@ async function searchBlockchain() {
 
 
 const cryptos = {
-            "bitcoin": { symbol: "BTC", logo: "https://cryptologos.cc/logos/bitcoin-btc-logo.png" },
-            "ethereum": { symbol: "ETH", logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png" },
-            "litecoin": { symbol: "LTC", logo: "https://cryptologos.cc/logos/litecoin-ltc-logo.png" },
-            "solana": { symbol: "SOL", logo: "https://cryptologos.cc/logos/solana-sol-logo.png" },
-            "dash": { symbol: "DASH", logo: "https://cryptologos.cc/logos/dash-dash-logo.png" },
-            "dogecoin": { symbol: "DOGE", logo: "https://cryptologos.cc/logos/dogecoin-doge-logo.png" },
-            "binancecoin": { symbol: "BNB", logo: "https://cryptologos.cc/logos/bnb-bnb-logo.png" },
-            "tether": { symbol: "USDT", logo: "https://cryptologos.cc/logos/tether-usdt-logo.png" },
-            "metis-token": { symbol: "METIS", logo: "https://cryptologos.cc/logos/metis-token-metis-logo.png" },
-            "manta-network": { symbol: "MANTA", logo: "https://cryptologos.cc/logos/manta-network-manta-logo.png" }
+                        "bitcoin": { symbol: "BTC", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/bitcoin-btc-logo28129278199549210072979.jpg" },
+            "ethereum": { symbol: "ETH", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/ethereum-eth-logo6464784847528636048.png" },
+            "litecoin": { symbol: "LTC", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/litecoin-ltc-logo8675545178060996964.png" },
+            "solana": { symbol: "SOL", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/solana-sol-logo281298285079945615734995.jpg" },
+            "dash": { symbol: "DASH", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/dash-dash-logo332793562558391043.png" },
+            "dogecoin": { symbol: "DOGE", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/dogecoin-doge-logo2539560636730686420.png" },
+            "binancecoin": { symbol: "BNB", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/bnb-bnb-logo259338065244576686.png" },
+            "tether": { symbol: "USDT", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/tether-usdt-logo8137853041787771395.png" },
+            "metis-token": { symbol: "METIS", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/metisdao-metis-logo271474949307854164.png" },
+            "manta-network": { symbol: "MANTA", logo: "https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/retouch_20250611201843848177814195853987194.png" }
         };
         
         let lastPrices = {};
