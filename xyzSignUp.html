@@ -9,53 +9,66 @@
 <body>
   <canvas id="quantumCanvas"></canvas>
   
-  <div class="signup-container">
+<div class="signup-container">
     <div class="connection-pulse"></div>
     <h2>XYZ ACCESS PORTAL</h2>
+    <div class="scrollable-content">  
     <form id="signup-form">
       <input type="text" id="fullName" placeholder="FULL NAME" required />
+       <p style="font-size:14%; color:var(--neon-blue) ">*Your First Name, Last Name</p>       
       <input type="text" id="userName" placeholder="USERNAME" required />
+      <p style="font-size:14%; color:var(--neon-blue) ">*Username should be 8+ characters/letters.</p>
       <input type="email" id="email" placeholder="EMAIL" required />
+       <p style="font-size:14%; color:var(--neon-blue) ">*Make sure your email isn't registered yet.</p>       
       <input type="password" id="password" placeholder="PASSWORD" required />
+       <p style="font-size:14%; color:var(--neon-blue) ">*Password should be 6 characters with 1 Capital Letter, Numbers and Special Characters (#$@*).</p>
+       
       <input type="password" id="confirmPassword" placeholder="CONFIRM PASSWORD" required />
+       <p style="font-size:14%; color:var(--neon-blue) ">*Finalize your password confirmation, re-input in here.</p>
+       
       <input type="text" id="referralCode" placeholder="REFERRAL CODE" />
       
       <div class="button-group">
-        <button type="submit">INITIALIZE ACCOUNT</button>
+        <button type="submit" id="submitBtn">INITIALIZE ACCOUNT</button>
         <a href="xyzLogIn.html">EXISTING USER ACCESS</a>
       </div>
-         
+      
       <p><a href="#" id="pwTrigger" class="pw-trigger">Forgot Password?</a></p>
+        <!-- Add this just before the </form> closing tag -->
+<div class="social-links">
+  <a href="https://www.xyzinnovagence.xyz" target="_blank" class="social-link" title="Visit Website">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+    </svg>
+    <span>Visit Website</span>
+  </a>
+  
+  <a href="https://yourapp.com/download" target="_blank" class="social-link" title="Download App">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+    </svg>
+    <span>Download App</span>
+  </a>
+</div>
+
     </form>
   </div>
   
-  <div id="floatingContainer" style="
-    display: none;
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 500px;
-    height: 400px;
-    background: black;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    z-index: 9999;
-    padding: 10px;
-    border-radius: 8px;
-  ">
-    <button id="closeBtn" style="
-        float: right;
-        background: red;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 4px;
-    ">Close</button>
+  <!-- Loading Container -->
+  <div class="loading-container" id="loadingContainer">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">QUANTUM INITIALIZATION</div>
+  </div>
+  
+  <!-- Notification Container -->
+  <div class="notification-container" id="notificationContainer"></div>
+  
+  <!-- Floating Container -->
+  <div id="floatingContainer">
+    <button id="closeBtn">Close</button>
     <iframe src="xyzForgotPass.html" style="width:100%; height: 90%; border: none;"></iframe>
   </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script type="module" src="xyzSignUp.js"></script>
 </body>
