@@ -1,4 +1,4 @@
-// Quantum background animation
+    // Quantum background animation
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('quantumCanvas'), antialias: true });
@@ -85,6 +85,34 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
     
+    // Notification system
+    function showNotification(message, type = 'success') {
+      const notificationContainer = document.getElementById('notificationContainer');
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <div>${message}</div>
+        <button class="notification-close">&times;</button>
+      `;
+      
+      notificationContainer.appendChild(notification);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+          notification.remove();
+        }, 300);
+      }, 5000);
+      
+      // Close button functionality
+      notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+          notification.remove();
+        }, 300);
+      });
+    }
 
     // Firebase integration
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
@@ -126,30 +154,33 @@
 
       return address;
     }
-
+   
     // Function to parse referral code from URL
     function getReferralCodeFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('ref') || '';
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('ref') || '';
     }
-
-    // Auto-fill referral code on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        const referralCodeInput = document.getElementById('referralCode');
-        const refCode = getReferralCodeFromURL();
-        
-        if (refCode) {
-            referralCodeInput.value = refCode;
-            referralCodeInput.readOnly = true;
-        }
-    });
 
     window.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("signup-form");
+      const loadingContainer = document.getElementById('loadingContainer');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      // Auto-fill referral code if present in URL
+      const referralCodeInput = document.getElementById('referralCode');
+      const refCode = getReferralCodeFromURL();
+      
+      if (refCode) {
+        referralCodeInput.value = refCode;
+      }
       
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        loadingContainer.style.display = 'flex';
+        
         const fullName = document.getElementById("fullName").value.trim();
         const userName = document.getElementById("userName").value.trim();
         const email = document.getElementById("email").value.trim();
@@ -159,11 +190,13 @@
         
         // If referral code is empty, check URL again (in case user cleared it)
         if (!referralCode) {
-            referralCode = getReferralCodeFromURL();
+          referralCode = getReferralCodeFromURL();
         }
 
         if (password !== confirmPassword) {
-          alert("Encryption keys do not match.");
+          showNotification("Encryption keys do not match.", "error");
+          loadingContainer.style.display = 'none';
+          submitBtn.disabled = false;
           return;
         }
 
@@ -206,29 +239,34 @@
             xyzTransactions: "",
           });
 
-          window.location.href = "xyzDashboard.html";
-          alert("Quantum account initialized successfully!");
+          showNotification("Quantum account initialized successfully!", "success");
+          setTimeout(() => {
+            window.location.href = "xyzDashboard.html";
+          }, 1500);
         } catch (error) {
           console.error("Sign-up error:", error);
-          alert("Quantum initialization failed: " + error.message);
+          showNotification("Quantum initialization failed: " + error.message, "error");
+          loadingContainer.style.display = 'none';
+          submitBtn.disabled = false;
         }
       });
-    });
-
-    document.getElementById('pwTrigger').addEventListener('click', function(event) {
+      
+      // Password reset modal
+      document.getElementById('pwTrigger').addEventListener('click', function(event) {
         event.preventDefault();
         document.getElementById('floatingContainer').style.display = 'block';
-    });
+      });
 
     document.getElementById('closeBtn').addEventListener('click', function() {
         document.getElementById('floatingContainer').style.display = 'none';
-    });
-    
-    // Check if both xyzEmailAccess and xyzUidAccess exist in localStorage
-    const email = localStorage.getItem("xyzEmailAccess");
-    const uid = localStorage.getItem("xyzUidAccess");
+      });
+      
+      // Check if both xyzEmailAccess and xyzUidAccess exist in localStorage
+      const email = localStorage.getItem("xyzEmailAccess");
+      const uid = localStorage.getItem("xyzUidAccess");
 
-    // If both exist, redirect to the desired URL
-    if (email && uid) {
-      window.location.href = "xyzDashboard.html";
-    }
+      // If both exist, redirect to the desired URL
+      if (email && uid) {
+        window.location.href = "xyzDashboard.html";
+      }
+    });
