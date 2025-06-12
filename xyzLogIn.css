@@ -14,6 +14,18 @@ body {
   overflow: hidden;
   position: relative;
 }
+:root {
+        --neon-blue: #00f7ff;
+        --neon-purple: #a777e3;
+        --neon-pink: #ff00ff;
+        --dark-bg: #0a0a14;
+        --darker-bg: #050510;
+        --glass-bg: rgba(15, 15, 35, 0.7);
+        --pw-reset-primary: var(--neon-blue);
+        --pw-reset-dark: var(--dark-bg);
+        --pw-reset-light: #f0f0f0;
+        --pw-reset-error: #ff5e62;
+    }
 
 /* Cyberpunk grid overlay */
 body::before {
@@ -185,3 +197,41 @@ body::before {
   90% { opacity: 1; }
   100% { transform: translate(var(--random-x), var(--random-y)); opacity: 0; }
 }
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 247, 255, 0.2);
+}
+
+.social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--neon-blue);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  color: #00d7df;
+  transform: translateY(-3px);
+}
+
+.social-link svg {
+  width: 24px;
+  height: px;
+  margin-bottom: 5px;
+  filter: drop-shadow(0 0 5px rgba(0, 247, 255, 0.5));
+}
+
+.social-link span {
+  font-size: 12px;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 1px;
+}
+
+
