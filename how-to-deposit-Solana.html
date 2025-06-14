@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Binding Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6e44ff;
+            --secondary: #00ffaa;
+            --dark: #0f0f1a;
+            --darker: #080811;
+            --light: #f0f0ff;
+            --gray: #2a2a3a;
+            --success: #00d97e;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        .step-card {
+            background: linear-gradient(145deg, var(--darker), var(--gray));
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-top: 0;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+        
+        .step-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .step-text {
+            font-size: 1.1rem;
+        }
+        
+        .highlight {
+            color: var(--secondary);
+            font-weight: bold;
+            background: rgba(0, 255, 170, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+        
+        .image-placeholder {
+            background: var(--darker);
+            border-radius: 12px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-placeholder::before {
+            content: "Step Image Preview";
+            position: absolute;
+            color: var(--light);
+            opacity: 0.5;
+            font-size: 1.2rem;
+        }
+        
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .button {
+            background: linear-gradient(90deg, var(--primary), #8a2be2);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Space Mono', monospace;
+            box-shadow: 0 4px 15px rgba(110, 68, 255, 0.3);
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(110, 68, 255, 0.4);
+        }
+        
+        .button.secondary {
+            background: var(--gray);
+            box-shadow: none;
+        }
+        
+        .button.secondary:hover {
+            background: #3a3a4a;
+        }
+        
+        .note {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--secondary);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 170, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 170, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 170, 0); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .step-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wallet Binding & Deposit Guide</h1>
+            <p class="subtitle">Secure your mining rewards by binding your Solana wallet</p>
+        </header>
+        
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h2>Initial Binding Prompt</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    A banner will automatically appear if your account doesn't have a bound wallet address. Click:
+                    <span class="highlight">"Go to Bind and Deposit"</span> to begin the process.
+                </div>
+                <div class="image-placeholder pulse">
+                    <div class="step-image">
+    <img src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/img_20250614_2225514245144634447920520.jpg" alt="Step 1 - Binding prompt">
+</div>
+                </div>
+                <button class="button floating">Go to Bind and Deposit</button>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h2>Enter Your Wallet Address</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    Bind your Solana wallet address. <span class="highlight">Ensure this is the wallet you'll use for deposits</span>, as we'll refund your total deposit during distribution.
+                    <div class="note">
+                        Important: Double-check your wallet address. Transactions to incorrect addresses cannot be recovered.
+                    </div>
+                </div>
+                <div class="image-placeholder">
+                   <div class="step-image">
+    <img src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/img_20250614_2227161098568448371282365.jpg " alt="Step 2 - Binding prompt">
+</div>
+                                  </div>
+                <button class="button">Confirm Address</button>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h2>Access Deposit Interface</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    Return to your dashboard and click the:
+                    <span class="highlight">"Receive"</span> button to access your deposit address.
+                </div>
+                <div class="image-placeholder">
+                    <div class="step-image">
+    <img src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/img_20250614_2228026194205669491886154.jpg" alt="Step 3 - Binding prompt">
+</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <h2>Copy Deposit Address</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    Click <span class="highlight">"Copy Address"</span> to copy your unique Solana deposit address to clipboard.
+                </div>
+                <div class="image-placeholder">
+                    <div class="step-image">
+    <img src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/img_20250614_2246007761242779959296428.jpg" alt="Step 4- Binding prompt">
+</div>
+                </div>
+                <button class="button secondary">Copy Address</button>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">5</div>
+            <h2>Send Initial Deposit</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    Send <span class="highlight">≥$5 worth of SOL</span> to cover:
+                    <ul>
+                        <li>Mining gas fees</li>
+                        <li>Transaction costs</li>
+                        <li>Human verification</li>
+                        <li>Anti-spam measures</li>
+                    </ul>
+                </div>
+                <div class="note">
+                    This initial deposit will be refunded during distribution along with your mining rewards. Make sure to use the wallet address you bound to your account when depositing.
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">6</div>
+            <h2>Verify Your Transaction</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    Return to the dashboard and click the <span class="highlight">"Receive"</span> button again, then scroll down to find the verification section.
+                </div>
+                <div class="image-placeholder">
+                    <div class="step-image">
+    <img src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/img_20250614_2228026194205669491886154.jpg" alt="Step 6- Binding prompt">
+</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-number">7</div>
+            <h2>Complete Verification</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    In the <span class="highlight">"Sol Deposit Verification"</span> section, click <span class="highlight">"Verify Transaction"</span> to confirm your deposit.
+                </div>
+                <div class="image-placeholder">
+                    <div class="step-image">
+    <img src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/screenshot_2025-06-14-22-31-08-47_5e222316dd43da827b0ba29de5c73e526852065128550848772.jpg" alt="Step 7 - Binding prompt">
+</div>
+                </div>
+                <button class="button pulse">Verify Transaction</button>
+            </div>
+        </div>
+        
+        <div class="step-card" style="border-left-color: var(--success);">
+            <div class="step-number" style="background: var(--success);">✓</div>
+            <h2 style="color: var(--success);">Deposit Complete!</h2>
+            <div class="step-content">
+                <div class="step-text">
+                    Your deposits will now be automatically counted. You can track your balance and mining progress on your dashboard.
+                </div>
+                <div class="image-placeholder">
+                    <div class="step-image">
+    <img src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/img_20250614_2254335981917974524304620.jpg" alt="Step 8 - Binding prompt">
+</div>
+                </div>
+                <button class="button" style="background: var(--success);">View Dashboard</button>
+            </div>
+        </div>
+        
+        <footer>
+                    <p>© 2025 XYZ INNOVAGENCE. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simple animation triggers
+        document.querySelectorAll('.step-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 200 * index);
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+    // Create the modal elements
+    const modal = document.createElement('div');
+    modal.id = 'imageModal';
+    modal.style.display = 'none';
+    modal.style.position = 'fixed';
+    modal.style.zIndex = '1000';
+    modal.style.left = '0';
+    modal.style.top = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.9)';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.flexDirection = 'column';
+    modal.style.cursor = 'zoom-out';
+    
+    const modalImg = document.createElement('img');
+    modalImg.style.maxWidth = '90%';
+    modalImg.style.maxHeight = '90%';
+    modalImg.style.objectFit = 'contain';
+    
+    const closeBtn = document.createElement('span');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.style.position = 'absolute';
+    closeBtn.style.top = '20px';
+    closeBtn.style.right = '35px';
+    closeBtn.style.color = 'red';
+    closeBtn.style.fontSize = '40px';
+    closeBtn.style.fontWeight = 'bold';
+    closeBtn.style.cursor = 'pointer';
+    
+    modal.appendChild(closeBtn);
+    modal.appendChild(modalImg);
+    document.body.appendChild(modal);
+    
+    // Add click events to all step images
+    document.querySelectorAll('.step-image img').forEach(img => {
+        img.style.cursor = 'zoom-in';
+        
+        img.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            modalImg.src = this.src;
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+    });
+    
+    // Close modal events
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', closeModal);
+    
+    // Close with ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+    
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+});
+    </script>
+</body>
+</html>
