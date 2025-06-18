@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XYZ Presale Countdown</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500&display=swap');
         
         :root {
             --primary-color: #00f0ff;
@@ -18,100 +18,76 @@
         .countdown-container {
             font-family: 'Orbitron', sans-serif;
             background: linear-gradient(135deg, var(--dark-color), #141a3a);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 12px;
+            padding: 0;
             width: 100%;
-            max-width: 800px;
+            max-width: 380px;
             margin: 0 auto;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
             border: 1px solid rgba(0, 240, 255, 0.1);
             position: relative;
             overflow: hidden;
-            animation: pulse 8s infinite alternate;
         }
         
-        .countdown-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 70%);
-            animation: rotate 60s linear infinite;
-            z-index: 0;
+        .video-header {
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            position: relative;
         }
         
-        .countdown-container::after {
-            content: '';
+        .video-header video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            border: 1px solid transparent;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(123, 45, 255, 0.3)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10,14,35,0.4), rgba(10,14,35,0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .countdown-header {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .countdown-title {
-            font-size: 2.5rem;
-            margin: 0;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .video-overlay h2 {
+            color: white;
+            font-size: 1.4rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-            animation: titleGlow 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 10px var(--primary-color);
+            margin: 0;
         }
         
-        .countdown-subtitle {
-            font-family: 'Rajdhani', sans-serif;
-            color: var(--text-color);
-            font-size: 1.2rem;
-            margin-top: 10px;
-            opacity: 0.9;
-            letter-spacing: 1px;
+        .countdown-content {
+            padding: 15px;
         }
         
         .countdown-timer {
             display: flex;
             justify-content: space-between;
-            position: relative;
-            z-index: 1;
+            margin: 10px 0;
         }
         
         .timer-segment {
             text-align: center;
             flex: 1;
-            margin: 0 10px;
-            perspective: 1000px;
+            margin: 0 3px;
         }
         
         .timer-number {
-            font-size: 4rem;
-            font-weight: 900;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--primary-color);
             background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(123, 45, 255, 0.1));
-            border-radius: 12px;
-            padding: 20px 10px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            padding: 8px 5px;
+            margin-bottom: 5px;
             position: relative;
-            transform-style: preserve-3d;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
         
@@ -121,7 +97,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 1px;
             background: linear-gradient(to right, transparent, var(--primary-color), transparent);
         }
         
@@ -131,134 +107,84 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 1px;
             background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
         }
         
         .timer-label {
             font-family: 'Rajdhani', sans-serif;
             color: var(--text-color);
-            font-size: 1rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.7;
-            margin-top: 5px;
-        }
-        
-        .countdown-footer {
-            text-align: center;
-            margin-top: 30px;
-            position: relative;
-            z-index: 1;
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
         
         .presale-date {
             font-family: 'Rajdhani', sans-serif;
             color: var(--text-color);
-            font-size: 1.2rem;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 10px;
+            padding: 6px 12px;
             background: rgba(0, 240, 255, 0.1);
+            border-radius: 20px;
             display: inline-block;
-            padding: 8px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            animation: datePulse 4s infinite;
         }
         
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
+        /* Animation for number changes */
         @keyframes pulse {
-            0% {
-                box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 50px rgba(123, 45, 255, 0.3);
-            }
-            100% {
-                box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
-        @keyframes titleGlow {
-            0% {
-                text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-            }
-            100% {
-                text-shadow: 0 0 20px rgba(123, 45, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.4);
-            }
+        .changing {
+            animation: pulse 0.3s ease;
         }
         
-        @keyframes datePulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.1);
-            }
-            70% {
-                transform: scale(1.02);
-                box-shadow: 0 0 0 10px rgba(0, 240, 255, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(0, 240, 255, 0);
-            }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .countdown-timer {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .timer-segment {
-                margin: 10px 0;
-                width: 80%;
-            }
-            
-            .timer-number {
-                font-size: 3rem;
-            }
-            
-            .countdown-title {
-                font-size: 2rem;
-            }
+        /* Hover effects */
+        .timer-number:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
         }
     </style>
 </head>
 <body>
     <div class="countdown-container">
-        <div class="countdown-header">
-            <h1 class="countdown-title">XYZ Presale Countdown</h1>
-            <p class="countdown-subtitle">The future begins in...</p>
-        </div>
-        
-        <div class="countdown-timer">
-            <div class="timer-segment">
-                <div class="timer-number" id="days">00</div>
-                <div class="timer-label">Days</div>
-            </div>
-            <div class="timer-segment">
-                <div class="timer-number" id="hours">00</div>
-                <div class="timer-label">Hours</div>
-            </div>
-            <div class="timer-segment">
-                <div class="timer-number" id="minutes">00</div>
-                <div class="timer-label">Minutes</div>
-            </div>
-            <div class="timer-segment">
-                <div class="timer-number" id="seconds">00</div>
-                <div class="timer-label">Seconds</div>
+        <div class="video-header">
+                 <video autoplay loop muted playsinline>
+                <source src="https://xyz1a1.wordpress.com/wp-content/uploads/2025/06/lv_0_20250618120955.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+                <h2>XYZ PRESALE</h2>
             </div>
         </div>
         
-        <div class="countdown-footer">
-            <div class="presale-date">Presale Starts: August 1, 2025</div>
+        <div class="countdown-content">
+            <div class="countdown-timer">
+                <div class="timer-segment">
+                    <div class="timer-number" id="days">00</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-segment">
+                    <div class="timer-number" id="hours">00</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-segment">
+                    <div class="timer-number" id="minutes">00</div>
+                    <div class="timer-label">Minutes</div>
+                </div>
+                <div class="timer-segment">
+                    <div class="timer-number" id="seconds">00</div>
+                    <div class="timer-label">Seconds</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <div class="presale-date">August 1, 2025</div>
+            </div>
         </div>
     </div>
 
@@ -295,10 +221,10 @@
             // If the countdown is finished, display a message
             if (distance < 0) {
                 clearInterval(countdown);
-                document.querySelector(".countdown-timer").innerHTML = `
-                    <div style="width: 100%; text-align: center;">
-                        <h2 style="color: var(--primary-color); font-size: 2rem;">The XYZ Presale Has Started!</h2>
-                        <p style="color: var(--text-color);">Join now and be part of the future</p>
+                document.querySelector(".countdown-content").innerHTML = `
+                    <div style="text-align: center; padding: 15px 0;">
+                        <h3 style="color: var(--primary-color); margin: 0;">PRESALE LIVE!</h3>
+                        <p style="color: var(--text-color); font-size: 0.8rem; margin: 5px 0 0;">Join now</p>
                     </div>
                 `;
             }
@@ -316,19 +242,6 @@
                 }, 300);
             }
         }
-        
-        // Add hover effects to timer numbers
-        document.querySelectorAll('.timer-number').forEach(number => {
-            number.addEventListener('mouseenter', () => {
-                number.style.transform = 'translateY(-5px) rotateX(10deg)';
-                number.style.boxShadow = '0 10px 25px rgba(0, 240, 255, 0.4)';
-            });
-            
-            number.addEventListener('mouseleave', () => {
-                number.style.transform = '';
-                number.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
-            });
-        });
     </script>
 </body>
 </html>
