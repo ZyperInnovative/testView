@@ -1,4 +1,11 @@
-  :root {
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500&display=swap');
+
+ :root {
+      --primary-color: #00f0ff;
+            --secondary-color: #7b2dff;
+            --dark-color: #0a0e23;
+            --accent-color: #ff2d7b;
+            --text-color: #e0e0ff;
       --matrix-green: #00ff41;
       --neon-cyan: #00f7ff;
       --neon-purple: #a777e3;
@@ -282,4 +289,137 @@
       .expanded-title {
         font-size: 1.4rem;
       }
+     .countdown-container {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, var(--dark-color), #141a3a);
+            border-radius: 12px;
+            padding: 0;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-header {
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .video-header video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10,14,35,0.4), rgba(10,14,35,0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-overlay h2 {
+            color: white;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--primary-color);
+            margin: 0;
+        }
+        
+        .countdown-content {
+            padding: 15px;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        
+        .timer-segment {
+            text-align: center;
+            flex: 1;
+            margin: 0 3px;
+        }
+        
+        .timer-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(123, 45, 255, 0.1));
+            border-radius: 8px;
+            padding: 8px 5px;
+            margin-bottom: 5px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .timer-number::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+        }
+        
+        .timer-number::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
+        }
+        
+        .timer-label {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-color);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        
+        .presale-date {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-color);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* Animation for number changes */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .changing {
+            animation: pulse 0.3s ease;
+        }
+        
+        /* Hover effects */
+        .timer-number:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+        }
     }
