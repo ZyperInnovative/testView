@@ -296,3 +296,57 @@ function limitWords(text, maxWords) {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', createFuturisticNav);
+
+ // Set the date we're counting down to (August 1, 2025)
+        const countDownDate = new Date("Aug 1, 2025 00:00:00").getTime();
+        
+        // Update the countdown every 1 second
+        const countdown = setInterval(function() {
+            // Get today's date and time
+            const now = new Date().getTime();
+            
+            // Find the distance between now and the countdown date
+            const distance = countDownDate - now;
+            
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the result
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            
+            // Add animation class when numbers change
+            animateNumber("days", days);
+            animateNumber("hours", hours);
+            animateNumber("minutes", minutes);
+            animateNumber("seconds", seconds);
+            
+            // If the countdown is finished, display a message
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.querySelector(".countdown-content").innerHTML = `
+                    <div style="text-align: center; padding: 15px 0;">
+                        <h3 style="color: var(--primary-color); margin: 0;">PRESALE LIVE!</h3>
+                        <p style="color: var(--text-color); font-size: 0.8rem; margin: 5px 0 0;">Join now</p>
+                    </div>
+                `;
+            }
+        }, 1000);
+        
+        // Function to animate number changes
+        function animateNumber(id, newValue) {
+            const element = document.getElementById(id);
+            const oldValue = parseInt(element.textContent) || 0;
+            
+            if (newValue !== oldValue) {
+                element.classList.add('changing');
+                setTimeout(() => {
+                    element.classList.remove('changing');
+                }, 300);
+            }
+        }
