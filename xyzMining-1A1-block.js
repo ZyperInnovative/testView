@@ -29,12 +29,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
         const db = getFirestore(app);  
           
         // Constants
-const XYZ_RATE_PER_24H = 0.3; // 0.3 XYZ per 24 hours
+const XYZ_RATE_PER_24H = 72; // 3 XYZ per hour * 24 hours
 const XYZ_RATE_PER_SECOND = XYZ_RATE_PER_24H / (24 * 3600); // Calculate per second rate
 const MINUTE_INTERVAL = 60000; // 60 seconds in milliseconds
-const SECOND_INTERVAL = 1000; // Update every second  
-const DAILY_PAYOUT_HOUR = 23; // 11 PM  
-const DAILY_PAYOUT_MINUTE = 59; // 59 minutes  
+const SECOND_INTERVAL = 1000; // Update every second
+const DAILY_PAYOUT_HOUR = 23; // 11 PM
+const DAILY_PAYOUT_MINUTE = 59; // 59 minutes
 const GAS_FEE = 0.00005; // SOL gas fee for transfers
           
         // Miner variables  
