@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nebula Explorer | XYZ Blockchain</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&family=Segoe+UI&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>     <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-functions.js"></script>
+
     <link rel="stylesheet" href="xyzBlockchainExplorer.css">
     <div class="ticker-container">
         
-        </div>
+        </head>
+<body>
+    <div class="ticker-container">
+        <div class="ticker-header">Live Crypto Prices</div>
         <div class="ticker-wrapper">
             <div id="crypto-items" class="crypto-items"></div>
             <div id="crypto-items-clone" class="crypto-items"></div>
@@ -26,12 +30,12 @@
             <div class="network">XYZ Blockchain Network</div>
         </header>
         <!-- Notification Container -->
-<div class="wallet-notification-wrapper">
-    <p style="color:grey;">Notifications and Updates:</p>
-  <div class="wallet-notification" id="walletNotification">
+        <div class="wallet-notification-wrapper">
+            <p>Notifications and Updates:</p>
+            <div class="wallet-notification" id="walletNotification">
                 <!-- Dynamic content goes here -->
-  </div>
-</div>
+            </div>
+        </div>
         
         <div class="network-stats">
             <div class="stat-card">
