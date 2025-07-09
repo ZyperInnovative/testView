@@ -405,9 +405,10 @@
             display: none;
             font-size: 1.05em;
             line-height: 1.4;
-            max-width: 400px; /* Constrain width */
+            max-width: 100px; /* Constrain width */
             margin-left: auto;
             margin-right: auto;
+            overflow:auto;
         }
         #transaction-status.success {
             background-color: #d4edda;
@@ -419,7 +420,7 @@
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
-            overflow:hidden;
+            overflow:auto;
         }
         body.dark-theme #transaction-status.success {
             background-color: #1e3a24;
