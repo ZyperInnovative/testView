@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google reCAPTCHA v2 API -->
+    <!-- Site key updated with the one provided by the user -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         /* Base styles from your provided neumorphic design */
@@ -705,7 +706,7 @@
                     <input type="password" id="login-password" placeholder="Enter your password">
                 </div>
                 <!-- reCAPTCHA for Login -->
-                <div class="g-recaptcha" data-sitekey="6LdN23wrAAAAADoAp2O-q5LCcByyR6gTLgGEiFZ_" data-callback="onLoginRecaptchaSuccess"></div>
+                <div class="g-recaptcha" data-sitekey="6Lc253wrAAAAAFoY8phBUXgbPoKLRnVpAcyYCgc8" data-callback="onLoginRecaptchaSuccess"></div>
                 <button id="login-btn" class="btn">Login</button>
             </div>
 
@@ -889,7 +890,7 @@
 
         let currentAlertResolve = null; // To hold the promise resolve function for the current alert
 
-        /**
+/**
          * Displays a custom alert modal with a given message.
          * @param {string} message - The message to display in the alert.
          * @returns {Promise<boolean>} A promise that resolves to true when the user clicks OK.
@@ -942,7 +943,8 @@
                 localStorage.setItem('theme', 'light');
             }
         });
-// Apply saved theme on load
+
+        // Apply saved theme on load
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.body.classList.remove('light-theme', 'dark-theme'); // Remove existing
@@ -1010,12 +1012,12 @@
                 connectWalletBtn.disabled = false;
             }
         });
-
-        // Signup Button Click
+ // Signup Button Click
         signupBtn.addEventListener('click', async () => {
             const email = signupEmailInput.value;
             const password = signupPasswordInput.value;
-            const recaptchaResponse = grecaptcha.getResponse(0); // Get response for signup CAPTCHA
+            // Get reCAPTCHA response for signup form (index 0 as it's the first one rendered if signup is default)
+            const recaptchaResponse = grecaptcha.getResponse(signupRecaptchaId); // Use the stored ID
 
             if (!email || !password) {
                 await showCustomAlert('Please enter both email and password for signup.');
@@ -1048,14 +1050,18 @@
                 }
                 await showCustomAlert(errorMessage);
             } finally {
-                grecaptcha.reset(0); // Reset signup CAPTCHA
+                // Reset reCAPTCHA for signup form
+                grecaptcha.reset(signupRecaptchaId);
             }
         });
-  // Login Button Click
+
+        // Login Button Click
         loginBtn.addEventListener('click', async () => {
             const email = loginEmailInput.value;
             const password = loginPasswordInput.value;
-            const recaptchaResponse = grecaptcha.getResponse(1); // Get response for login CAPTCHA
+            // Get reCAPTCHA response for login form using its stored widget ID
+            const recaptchaResponse = grecaptcha.getResponse(loginRecaptchaId);
+
 
             if (!email || !password) {
                 await showCustomAlert('Please enter both email and password for login.');
@@ -1080,7 +1086,8 @@
                 }
                 await showCustomAlert(errorMessage);
             } finally {
-                grecaptcha.reset(1); // Reset login CAPTCHA
+                // Reset reCAPTCHA for login form
+                grecaptcha.reset(loginRecaptchaId);
             }
         });
 
@@ -1095,6 +1102,41 @@
                 await showCustomAlert('Logout failed: ' + error.message);
             }
         });
+ // Global reCAPTCHA widget IDs to manage multiple widgets
+        let loginRecaptchaId;
+        let signupRecaptchaId;
+
+        // Global callback functions for reCAPTCHA (needed if data-callback is used)
+        window.onLoginRecaptchaSuccess = function(token) {
+            console.log("Login reCAPTCHA successful:", token);
+        }
+
+        window.onSignupRecaptchaSuccess = function(token) {
+            console.log("Signup reCAPTCHA successful:", token);
+        }
+
+        // Function to render reCAPTCHA widgets explicitly
+        function renderRecaptchas() {
+            // Render login reCAPTCHA if its div exists and hasn't been rendered
+            const loginRecaptchaDiv = document.querySelector('#login-form .g-recaptcha');
+            if (loginRecaptchaDiv && loginRecaptchaId === undefined) { // Check if ID is undefined to avoid re-rendering
+                loginRecaptchaId = grecaptcha.render(loginRecaptchaDiv, {
+                    'sitekey': '6Lc253wrAAAAAFoY8phBUXgbPoKLRnVpAcyYCgc8', // Use your actual site key here
+                    'callback': 'onLoginRecaptchaSuccess'
+                });
+                loginRecaptchaDiv.dataset.recaptchaId = loginRecaptchaId; // Store the widget ID
+            }
+
+            // Render signup reCAPTCHA if its div exists and hasn't been rendered
+            const signupRecaptchaDiv = document.querySelector('#signup-form .g-recaptcha');
+            if (signupRecaptchaDiv && signupRecaptchaId === undefined) { // Check if ID is undefined to avoid re-rendering
+                signupRecaptchaId = grecaptcha.render(signupRecaptchaDiv, {
+                    'sitekey': '6Lc253wrAAAAAFoY8phBUXgbPoKLRnVpAcyYCgc8', // Use your actual site key here
+                    'callback': 'onSignupRecaptchaSuccess'
+                });
+                signupRecaptchaDiv.dataset.recaptchaId = signupRecaptchaId; // Store the widget ID
+            }
+        }
 
         // Toggle between Login and Signup forms
         showLoginBtn.addEventListener('click', () => {
@@ -1102,12 +1144,12 @@
             signupForm.classList.remove('active');
             showLoginBtn.classList.add('active');
             showSignupBtn.classList.remove('active');
-            // Ensure reCAPTCHA is rendered correctly when switching tabs
-            grecaptcha.render(document.querySelector('#login-form .g-recaptcha'), {
-                'sitekey': '6LdN23wrAAAAADoAp2O-q5LCcByyR6gTLgGEiFZ_',
-                'callback': 'onLoginRecaptchaSuccess'
-            });
-            grecaptcha.reset(0); // Reset signup CAPTCHA if it was visible
+            // Reset signup CAPTCHA if it was visible
+            if (signupRecaptchaId !== undefined) {
+                grecaptcha.reset(signupRecaptchaId);
+            }
+            // Ensure reCAPTCHA for login is rendered
+            renderRecaptchas();
         });
 
         showSignupBtn.addEventListener('click', () => {
@@ -1115,22 +1157,13 @@
             loginForm.classList.remove('active');
             showSignupBtn.classList.add('active');
             showLoginBtn.classList.remove('active');
-            // Ensure reCAPTCHA is rendered correctly when switching tabs
-            grecaptcha.render(document.querySelector('#signup-form .g-recaptcha'), {
-                'sitekey': '6LdN23wrAAAAADoAp2O-q5LCcByyR6gTLgGEiFZ_',
-                'callback': 'onSignupRecaptchaSuccess'
-            });
-            grecaptcha.reset(1); // Reset login CAPTCHA if it was visible
+            // Reset login CAPTCHA if it was visible
+            if (loginRecaptchaId !== undefined) {
+                grecaptcha.reset(loginRecaptchaId);
+            }
+            // Ensure reCAPTCHA for signup is rendered
+            renderRecaptchas();
         });
-
-        // Global callback functions for reCAPTCHA (needed if data-callback is used)
-        function onLoginRecaptchaSuccess(token) {
-            console.log("Login reCAPTCHA successful:", token);
-        }
-
-        function onSignupRecaptchaSuccess(token) {
-            console.log("Signup reCAPTCHA successful:", token);
-        }
 
         // --- Firestore Data Management ---
 
@@ -1189,7 +1222,8 @@
                 await showCustomAlert("Failed to load user data. Please try again.");
             }
         }
-    /**
+
+        /**
          * Saves or updates the user's Solana wallet address in Firestore.
          * @param {string} walletAddress - The Solana wallet address.
          */
@@ -1282,8 +1316,7 @@
                 await showCustomAlert("Wallet connection failed. Please ensure your wallet is unlocked and try again. Error: " + err.message);
             }
         });
-
-        // --- Presale Purchase Logic ---
+ // --- Presale Purchase Logic ---
 
         // Handle Presale Purchase Clicks
         priceCards.forEach(card => {
@@ -1401,18 +1434,26 @@
 
         // Initial reCAPTCHA rendering for the active tab on page load
         // This ensures the CAPTCHA is visible immediately on the default login tab.
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check which tab is initially active and render its reCAPTCHA
-            if (loginForm.classList.contains('active')) {
-                grecaptcha.render(document.querySelector('#login-form .g-recaptcha'), {
-                    'sitekey': '6LdN23wrAAAAADoAp2O-q5LCcByyR6gTLgGEiFZ_',
+        // The grecaptcha.ready function ensures the reCAPTCHA API is fully loaded before rendering.
+        grecaptcha.ready(function() {
+            // Render login reCAPTCHA initially (assuming login form is active by default)
+            const loginRecaptchaDiv = document.querySelector('#login-form .g-recaptcha');
+            if (loginRecaptchaDiv) {
+                loginRecaptchaId = grecaptcha.render(loginRecaptchaDiv, {
+                    'sitekey': '6Lc253wrAAAAAFoY8phBUXgbPoKLRnVpAcyYCgc8', // Use your actual site key here
                     'callback': 'onLoginRecaptchaSuccess'
                 });
-            } else if (signupForm.classList.contains('active')) {
-                grecaptcha.render(document.querySelector('#signup-form .g-recaptcha'), {
-                    'sitekey': '6LdN23wrAAAAADoAp2O-q5LCcByyR6gTLgGEiFZ_',
+                loginRecaptchaDiv.dataset.recaptchaId = loginRecaptchaId; // Store the widget ID
+            }
+
+            // Render signup reCAPTCHA (it will be hidden initially)
+            const signupRecaptchaDiv = document.querySelector('#signup-form .g-recaptcha');
+            if (signupRecaptchaDiv) {
+                signupRecaptchaId = grecaptcha.render(signupRecaptchaDiv, {
+                    'sitekey': '6Lc253wrAAAAAFoY8phBUXgbPoKLRnVpAcyYCgc8', // Use your actual site key here
                     'callback': 'onSignupRecaptchaSuccess'
                 });
+                signupRecaptchaDiv.dataset.recaptchaId = signupRecaptchaId; // Store the widget ID
             }
         });
     </script>
