@@ -493,6 +493,3 @@
     // Call on load and resize
     window.addEventListener('load', adjustTickerAnimation);
     window.addEventListener('resize', adjustTickerAnimation);
-</script>
-</body>
-</html>
