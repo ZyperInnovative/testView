@@ -1,4 +1,4 @@
-// Firebase configuration
+ // Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyDIwoUIMJrJQeLBD9vijsfIUXG9BgaGSPs",
         authDomain: "miner-zyx.firebaseapp.com",
@@ -424,7 +424,7 @@
                 ticker.innerHTML = '';  
                 tickerClone.innerHTML = ''; // Clear clone as well
                 
- const fragment = document.createDocumentFragment(); // Use fragment for performance
+                const fragment = document.createDocumentFragment(); // Use fragment for performance
                 
                 for (const [id, crypto] of Object.entries(cryptos)) {  
                     const price = data[id].usd;  
