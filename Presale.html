@@ -1461,6 +1461,157 @@
                 signupRecaptchaDiv.dataset.recaptchaId = signupRecaptchaId; // Store the widget ID
             }
         });
+
+(function() {
+    const PRESALE_LINK = "https://xyzinnovagence.xyz/Presale";
+    const WALLET_CHECK_INTERVAL = 3000; // Check every 3 seconds
+
+    // Function to create and show the modal
+    function showWalletNotificationModal() {
+        // Check if modal already exists to prevent duplicates
+        if (document.getElementById('solana-wallet-notification-modal')) {
+            return;
+        }
+
+        const modalHtml = `
+            <div id="solana-wallet-notification-modal" style="
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            ">
+                <div style="
+                    background-color: white;
+                    padding: 30px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    max-width: 400px;
+                    color: black; /* Ensure text is black for visibility */
+                ">
+                    <h2>Solana Wallet Required</h2>
+                    <p>It looks like you don't have a Solana wallet extension installed or enabled.</p>
+                    <p>To participate in the presale, please use a browser with a Solana wallet like Phantom or Solflare.</p>
+                    <button id="open-solana-wallet-btn" style="
+                        background-color: #925FEF; /* Phantom purple */
+                        color: white;
+                        padding: 12px 25px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 16px;
+                        margin-top: 20px;
+                    ">Open Solana Wallet & Copy Link</button>
+                    <button id="close-solana-wallet-modal-btn" style="
+                        background-color: #ccc;
+                        color: black;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        margin-top: 10px;
+                        margin-left: 10px;
+                    ">Close</button>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+        document.getElementById('open-solana-wallet-btn').addEventListener('click', function() {
+            copyToClipboard(PRESALE_LINK);
+            // Attempt to open a Solana wallet. This relies on URL schemes.
+            // These might not work in all browsers/OS combinations, and
+            // it primarily works if the user has the desktop app installed.
+            window.location.href = 'solana://' + encodeURIComponent(PRESALE_LINK);
+            // Fallback for Phantom browser extension
+            window.open('https://phantom.app/', '_blank'); // Opens Phantom website if app scheme fails
+            // Fallback for Solflare browser extension
+            window.open('https://solflare.com/', '_blank'); // Opens Solflare website if app scheme fails
+
+            closeWalletNotificationModal();
+        });
+
+        document.getElementById('close-solana-wallet-modal-btn').addEventListener('click', closeWalletNotificationModal);
+    }
+
+    // Function to close the modal
+    function closeWalletNotificationModal() {
+        const modal = document.getElementById('solana-wallet-notification-modal');
+        if (modal) {
+            modal.remove();
+        }
+    }
+
+    // Function to copy text to clipboard
+    function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                console.log('Presale link copied to clipboard!');
+                alert('Presale link copied to clipboard! Please paste it into your Solana wallet browser.');
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+                alert('Failed to copy link. Please manually copy: ' + text);
+            });
+        } else {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed"; // Avoid scrolling to bottom of page in MS Edge.
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.width = "2em";
+            textArea.style.height = "2em";
+            textArea.style.padding = "0";
+            textArea.style.border = "none";
+            textArea.style.outline = "none";
+            textArea.style.boxShadow = "none";
+            textArea.style.background = "transparent";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                console.log('Presale link copied to clipboard (fallback)!');
+                alert('Presale link copied to clipboard! Please paste it into your Solana wallet browser.');
+            } catch (err) {
+                console.error('Fallback: Could not copy text: ', err);
+                alert('Failed to copy link. Please manually copy: ' + text);
+            }
+            document.body.removeChild(textArea);
+        }
+    }
+
+    // Function to check for Solana wallet
+    function checkSolanaWallet() {
+        // Check for common Solana wallet objects (Phantom, Solflare, etc.)
+        if (window.solana && window.solana.isPhantom || window.solana && window.solana.isSolflare) {
+            console.log("Solana wallet detected!");
+            closeWalletNotificationModal(); // Close modal if it was open
+            return true;
+        } else {
+            console.log("Solana wallet not detected.");
+            showWalletNotificationModal();
+            return false;
+        }
+    }
+
+    // Initial check when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        checkSolanaWallet();
+        // Set up an interval to keep checking, in case the user enables the wallet mid-session
+        setInterval(checkSolanaWallet, WALLET_CHECK_INTERVAL);
+    });
+
+})();
+
     </script>
 </body>
 </html>
