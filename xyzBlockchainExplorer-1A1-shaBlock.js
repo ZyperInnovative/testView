@@ -493,3 +493,55 @@
     // Call on load and resize
     window.addEventListener('load', adjustTickerAnimation);
     window.addEventListener('resize', adjustTickerAnimation);
+
+// Function to extract address or hash from URL
+function extractAddressFromURL() {
+    const url = window.location.href;
+    
+    // Check for hash pattern in URL (after the last slash)
+    const lastSegment = url.substring(url.lastIndexOf('/') + 1);
+    
+    // Check if it's a hash (long alphanumeric string)
+    if (lastSegment && lastSegment.length >= 32 && /^[a-zA-Z0-9]+$/.test(lastSegment)) {
+        return lastSegment;
+    }
+    
+    // Check for specific parameter patterns
+    const addressMatch = url.match(/[?&](address|hash)=([^&]+)/);
+    if (addressMatch && addressMatch[2]) {
+        return addressMatch[2];
+    }
+    
+    // Check for path-based pattern like your example
+    const pathMatch = url.match(/\/address-block=([^&]+)/);
+    if (pathMatch && pathMatch[1]) {
+        return pathMatch[1];
+    }
+    
+    return null;
+}
+
+// Function to automatically search if address/hash is detected in URL
+function autoSearchFromURL() {
+    const addressOrHash = extractAddressFromURL();
+    
+    if (addressOrHash) {
+        // Set the search input value
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = addressOrHash;
+            
+            // Wait for DOM to be fully ready, then trigger search
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    setTimeout(() => searchBlockchain(), 500);
+                });
+            } else {
+                setTimeout(() => searchBlockchain(), 500);
+            }
+        }
+    }
+}
+
+// Call the auto-search function when script loads
+autoSearchFromURL();
