@@ -528,16 +528,31 @@ function autoSearchFromURL() {
     if (addressOrHash) {
         // Set the search input value
         const searchInput = document.getElementById('search-input');
-        if (searchInput) {
+        const searchBtn = document.getElementById('search-btn');
+        
+        if (searchInput && searchBtn) {
             searchInput.value = addressOrHash;
+            
+            // Scroll to search bar smoothly
+            const searchSection = document.querySelector('.search-section');
+            if (searchSection) {
+                searchSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center'
+                });
+            }
             
             // Wait for DOM to be fully ready, then trigger search
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => {
-                    setTimeout(() => searchBlockchain(), 500);
+                    setTimeout(() => {
+                        searchBtn.click();
+                    }, 1000);
                 });
             } else {
-                setTimeout(() => searchBlockchain(), 500);
+                setTimeout(() => {
+                    searchBtn.click();
+                }, 1000);
             }
         }
     }
