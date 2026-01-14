@@ -3,60 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quantum Sign-Up Portal</title>
+  <meta name="description" content="Quantum Sign-Up Portal - Secure access to XYZ platform">
+  <title>Quantum Sign-Up Portal | XYZ Innovations</title>
   <link rel="stylesheet" href="xyzSignUp.css">
- </head>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
 <body>
-   <div class="scrollable-content">  
-  <canvas id="quantumCanvas"></canvas>  
-<div class="signup-container">
-    <div class="connection-pulse"></div>
-    <h2>XYZ ACCESS PORTAL</h2>
-     <form id="signup-form">
-      <input type="text" id="fullName" placeholder="FULL NAME" required />
-       <p style="font-size:14%; color:var(--neon-blue) ">*Your First Name, Last Name</p>       
-      <input type="text" id="userName" placeholder="USERNAME" required />
-      <p style="font-size:14%; color:var(--neon-blue) ">*Username should be 8+ characters/letters.</p>
-      <input type="email" id="email" placeholder="EMAIL" required />
-       <p style="font-size:14%; color:var(--neon-blue) ">*Make sure your email isn't registered yet.</p>       
-      <input type="password" id="password" placeholder="PASSWORD" required />
-       <p style="font-size:14%; color:var(--neon-blue) ">*Password should be 6 characters with 1 Capital Letter, Numbers and Special Characters (#$@*).</p>
-       
-      <input type="password" id="confirmPassword" placeholder="CONFIRM PASSWORD" required />
-       <p style="font-size:14%; color:var(--neon-blue) ">*Finalize your password confirmation, re-input in here.</p>
-       
-      <input type="text" id="referralCode" placeholder="REFERRAL CODE" />
-      
-      <div class="button-group">
-        <button type="submit" id="submitBtn">INITIALIZE ACCOUNT</button>
-        <a href="xyzLogIn.html">EXISTING USER ACCESS</a>
-      </div>
-      
-      <p><a href="#" id="pwTrigger" class="pw-trigger">Forgot Password?</a></p>
-        <!-- Add this just before the </form> closing tag -->
-<div class="social-links">
-  <a href="https://www.xyzinnovagence.xyz" target="_blank" class="social-link" title="Visit Website">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-    </svg>
-    <span>Visit Website</span>
-  </a>
+  <div class="particles-overlay"></div>
+  <canvas id="quantumCanvas"></canvas>
   
-  <a href="https://apk.e-droid.net/apk/app3590320-t5lzs1.apk?v=8" target="_blank" class="social-link" title="Download App">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-    </svg>
-    <span>Download App</span>
-  </a>
-</div>
-
-    </form>
+  <div class="scrollable-content">
+    <div class="signup-container">
+      <div class="connection-pulse" title="Quantum Connection Active"></div>
+      
+      <h2>
+        <span style="color: var(--neon-blue)">XYZ</span>
+        <span style="color: var(--neon-purple)"> ACCESS</span>
+        <span style="color: var(--neon-pink)"> PORTAL</span>
+      </h2>
+      
+      <form id="signup-form">
+        <!-- Full Name -->
+        <div class="form-group">
+          <input type="text" id="fullName" placeholder=" " required />
+          <label class="input-label">FULL NAME</label>
+          <div class="validation-message" id="fullNameValidation"></div>
+        </div>
+        <p class="input-hint">* Enter your First Name and Last Name</p>
+        
+        <!-- Username -->
+        <div class="form-group">
+          <input type="text" id="userName" placeholder=" " required />
+          <label class="input-label">USERNAME</label>
+          <div class="validation-message" id="userNameValidation"></div>
+        </div>
+        <p class="input-hint">* 8+ characters, letters and numbers only</p>
+        
+        <!-- Email -->
+        <div class="form-group">
+          <input type="email" id="email" placeholder=" " required />
+          <label class="input-label">EMAIL</label>
+          <div class="validation-message" id="emailValidation"></div>
+        </div>
+        <p class="input-hint">* Use a valid, unregistered email address</p>
+        
+        <!-- Password -->
+        <div class="form-group">
+          <input type="password" id="password" placeholder=" " required />
+          <label class="input-label">PASSWORD</label>
+          <button type="button" class="password-toggle" id="togglePassword" aria-label="Show password">
+            👁️
+          </button>
+          <div class="password-strength">
+            <div class="strength-meter" id="strengthMeter"></div>
+          </div>
+          <div class="validation-message" id="passwordValidation"></div>
+        </div>
+        <p class="input-hint">* 6+ chars with 1 capital, numbers, special chars (#$@*)</p>
+        
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <input type="password" id="confirmPassword" placeholder=" " required />
+          <label class="input-label">CONFIRM PASSWORD</label>
+          <button type="button" class="password-toggle" id="toggleConfirmPassword" aria-label="Show password">
+            👁️
+          </button>
+          <div class="validation-message" id="confirmPasswordValidation"></div>
+        </div>
+        <p class="input-hint">* Re-enter your password for confirmation</p>
+        
+        <!-- Referral Code -->
+        <div class="form-group">
+          <input type="text" id="referralCode" placeholder=" " />
+          <label class="input-label">REFERRAL CODE (Optional)</label>
+          <div class="validation-message" id="referralCodeValidation"></div>
+        </div>
+        <p class="input-hint">* Enter referral code if you have one</p>
+        
+        <div class="button-group">
+          <button type="submit" id="submitBtn">
+            <span>⚡ INITIALIZE ACCOUNT</span>
+          </button>
+          <a href="xyzLogIn.html">
+            <span>🔐 EXISTING USER ACCESS</span>
+          </a>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px; color: rgba(0, 247, 255, 0.8);">
+          <a href="#" id="pwTrigger" class="pw-trigger" style="text-decoration: none; border-bottom: 1px dotted var(--neon-blue);">
+            🔑 Forgot Password?
+          </a>
+        </p>
+        
+        <!-- Social Links -->
+        <div class="social-links">
+          <a href="https://www.xyzinnovagence.xyz" target="_blank" class="social-link" title="Visit Website" aria-label="Visit our website">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+            <span>Visit Website</span>
+          </a>
+          
+          <a href="https://apk.e-droid.net/apk/app3590320-t5lzs1.apk?v=8" target="_blank" class="social-link" title="Download App" aria-label="Download our mobile app">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            <span>Download App</span>
+          </a>
+          
+          <a href="#" class="social-link" title="Get Support" aria-label="Get support" onclick="showNotification('Support: contact@xyzinnovagence.xyz', 'info')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+            <span>Support</span>
+          </a>
+        </div>
+      </form>
+    </div>
   </div>
   
   <!-- Loading Container -->
   <div class="loading-container" id="loadingContainer">
     <div class="loading-spinner"></div>
     <div class="loading-text">QUANTUM INITIALIZATION</div>
+    <div style="margin-top: 20px; font-size: 12px; color: rgba(0, 247, 255, 0.7);">
+      Securing your quantum credentials...
+    </div>
   </div>
   
   <!-- Notification Container -->
@@ -64,11 +136,11 @@
   
   <!-- Floating Container -->
   <div id="floatingContainer">
-    <button id="closeBtn">Close</button>
-    <iframe src="xyzForgotPass.html" style="width:100%; height: 90%; border: none;"></iframe>
+    <button id="closeBtn">✕ CLOSE</button>
+    <iframe src="xyzForgotPass.html" style="width:100%; height: calc(100% - 40px); border: none; border-radius: 8px;"></iframe>
   </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script type="module" src="xyzSignUp.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module" src="xyzSignUp.js"></script>
 </body>
 </html>
