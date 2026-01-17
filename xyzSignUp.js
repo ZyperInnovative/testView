@@ -231,17 +231,17 @@ function generateXyzAddress() {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const xyzLetters = ['x', 'y', 'z'];
   
-  let address = 'xyz_';
+  let address = 'xyz';
   
-  for (let i = 0; i < 12; i++) {
-    if (i === 4 || i === 8) {
+  for (let i = 0; i < 100; i++) {
+    if (i === 25 || i === 50) {
       address += xyzLetters[Math.floor(Math.random() * xyzLetters.length)];
     } else {
       address += chars[Math.floor(Math.random() * chars.length)];
     }
   }
   
-  address += '_xyz';
+  address += '0xyz';
   return address;
 }
 
