@@ -249,7 +249,13 @@ if (!navigator.onLine) {
                     };
                     
                     // Add to Blockchain collection
-                    await addDoc(collection(db, 'Blockchain'), txData);
+                    await addDoc(collection(db, 'blockchain'), txData);
+                    
+// ALSO add to a backup/archive collection
+await addDoc(collection(db, 'Blockchain'), {
+    ...txData,
+    backupTimestamp: serverTimestamp()
+});
                     
                     // Process the transfer with gas fee deduction
                     await updateDoc(userDocRef, {  
